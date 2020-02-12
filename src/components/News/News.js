@@ -40,6 +40,7 @@ const News = props => {
       </header>
 
       <main>
+        {/* Pre-load next page's items, but hide them */}
         <ol start={1 + currentPage * STORIES_PER_PAGE}>
           {topStoryIds
             .slice(
