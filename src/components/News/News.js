@@ -31,7 +31,12 @@ const News = props => {
           <button onClick={handleSetPage(-1)} disabled={currentPage === 0}>
             Prev
           </button>
-          <button onClick={handleSetPage(1)}>Next</button>
+          <button
+            onClick={handleSetPage(1)}
+            disabled={(currentPage + 1) * STORIES_PER_PAGE > topStoryIds.length}
+          >
+            Next
+          </button>
         </nav>
       </header>
 
@@ -40,10 +45,16 @@ const News = props => {
           {topStoryIds
             .slice(
               currentPage * STORIES_PER_PAGE,
-              (currentPage + 1) * STORIES_PER_PAGE
+              (currentPage + 2) * STORIES_PER_PAGE
             )
-            .map(id => (
-              <li key={id}>
+            .map((id, idx) => (
+              <li
+                key={id}
+                style={{
+                  display:
+                    idx >= (currentPage + 1) * STORIES_PER_PAGE ? 'none' : ''
+                }}
+              >
                 <NewsItem id={id} />
               </li>
             ))}
