@@ -42,3 +42,12 @@ export const addBlockQuotes = htmlStr => {
 
   return quotedStr;
 };
+
+export const extractHostname = url => {
+  // And strip possible 'www.' at the start
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return undefined;
+  }
+};
