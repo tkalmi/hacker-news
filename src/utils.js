@@ -2,15 +2,20 @@ export const getTimeDiff = time => {
   const currentTime = new Date().getTime() / 1000;
   const diff = currentTime - time;
   if (diff < 60) {
-    return `${Math.round(diff)} seconds ago`;
+    const parsed = Math.round(diff);
+    return `${parsed} second${parsed > 1 ? 's' : ''} ago`;
   } else if (diff < 3_600) {
-    return `${Math.round(diff / 60)} minutes ago`;
+    const parsed = Math.round(diff / 60);
+    return `${parsed} minute${parsed > 1 ? 's' : ''} ago`;
   } else if (diff < 86_400) {
-    return `${Math.round(diff / 3_600)} hours ago`;
+    const parsed = Math.round(diff / 3_600);
+    return `${parsed} hour${parsed > 1 ? 's' : ''} ago`;
   } else if (diff < 31_536_000) {
-    return `${Math.round(diff / 86_400)} days ago`;
+    const parsed = Math.round(diff / 86_400);
+    return `${parsed} day${parsed > 1 ? 's' : ''} ago`;
   }
-  return `${Math.round(diff / 31_536_000)} years ago`;
+  const parsed = Math.round(diff / 31_536_000);
+  return `${parsed} year${parsed > 1 ? 's' : ''} ago`;
 };
 
 export const ensureHonestLinks = htmlStr => {
