@@ -25,3 +25,26 @@ test('Gets correct time difference from given Unix timestp', () => {
   const yearsAgo = SYSTEM_TIME - 60 * 60 * 24 * 365 * 2;
   expect(utils.getTimeDiff(yearsAgo)).toEqual('2 years ago');
 });
+
+test('Ensures content for <a> to match its href', () => {
+  const honestATag = '<a href="foobar.com">foobar.com</a>';
+  expect(utils.ensureHonestLinks(honestATag)).toEqual(honestATag);
+
+  const maliciosATag = `<a href="phishing.com">Click here</a>`;
+  expect(utils.ensureHonestLinks(maliciosATag)).toEqual(
+    '<a href="phishing.com">phishing.com</a>'
+  );
+
+  const noATag = 'bla bla bla <p>Hello world</p>';
+  expect(utils.ensureHonestLinks(noATag)).toEqual(noATag);
+
+  const aTagInsideText =
+    "<p>Foobar quux <a href='hello.world'>hello.world</a></p>";
+  expect(utils.ensureHonestLinks(aTagInsideText)).toEqual(aTagInsideText);
+
+  const maliciousATagInsideText =
+    "<p>Malicious <a href='malicious.com'>Click here</a></p>";
+  expect(utils.ensureHonestLinks(maliciousATagInsideText)).toEqual(
+    "<p>Malicious <a href='malicious.com'>malicious.com</a></p>"
+  );
+});
