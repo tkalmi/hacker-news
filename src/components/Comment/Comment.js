@@ -5,6 +5,7 @@ import sanitizeHtml from 'sanitize-html';
 
 import Author from '../Author';
 import { addBlockQuotes, ensureHonestLinks } from '../../utils';
+import PublishTime from '../PublishTime';
 
 const Comment = ({ depth = 0, id, originalPoster }) => {
   const [showMore, setShowMore] = useState(depth < 2);
@@ -24,8 +25,11 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
   return (
     <article>
       <header>
-        <Author author={comment.by} />
-        {comment.by === originalPoster && '(OP)'}
+        <Author
+          author={comment.by}
+          label={comment.by === originalPoster && `${comment.by} [OP]`}
+        />
+        | <PublishTime time={comment.time} />
       </header>
       <p
         dangerouslySetInnerHTML={{
