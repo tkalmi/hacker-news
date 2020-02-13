@@ -17,7 +17,7 @@ const News = props => {
   const path = useLocation().pathname.replace('/', '') || 'topstories';
 
   const query = new URLSearchParams(useLocation().search);
-  const currentPage = parseInt(query.get('p') ?? 0, 10);
+  const currentPage = parseInt(query.get('p') || 1, 10);
 
   useFirebaseConnect(`v0/${path}`);
 
@@ -35,32 +35,32 @@ const News = props => {
       <header>
         <h1>{HEADINGS[path]}</h1>
         <nav>
-          <Link to={`/?p=${currentPage - 1}`} disabled={currentPage === 0}>
-            Prev
-          </Link>
-          <Link
-            to={`/?p=${currentPage + 1}`}
-            disabled={(currentPage + 1) * STORIES_PER_PAGE > storyIds.length}
-          >
-            Next
-          </Link>
+          {currentPage > 1 && (
+            <Link to={location => `${location.pathname}?p=${currentPage - 1}`}>
+              Prev
+            </Link>
+          )}
+          {(currentPage + 1) * STORIES_PER_PAGE <= storyIds.length && (
+            <Link to={location => `${location.pathname}?p=${currentPage + 1}`}>
+              Next
+            </Link>
+          )}
         </nav>
       </header>
 
       <main>
         {/* Pre-load next page's items, but hide them */}
-        <ol start={1 + currentPage * STORIES_PER_PAGE}>
+        <ol start={1 + (currentPage - 1) * STORIES_PER_PAGE}>
           {storyIds
             .slice(
-              currentPage * STORIES_PER_PAGE,
-              (currentPage + 2) * STORIES_PER_PAGE
+              (currentPage - 1) * STORIES_PER_PAGE,
+              (currentPage + 1) * STORIES_PER_PAGE
             )
             .map((id, idx) => (
               <li
                 key={id}
                 style={{
-                  display:
-                    idx >= (currentPage + 1) * STORIES_PER_PAGE ? 'none' : ''
+                  display: idx >= currentPage * STORIES_PER_PAGE ? 'none' : ''
                 }}
               >
                 <NewsItem id={id} />
