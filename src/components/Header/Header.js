@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const LINKS = [
   { path: '/', label: 'Top' },
@@ -8,17 +8,15 @@ const LINKS = [
 ];
 
 const Header = props => {
-  const currentPath = useLocation().pathname;
   return (
     <header>
       <nav>
         <ul>
           {LINKS.map(link => (
-            <li
-              key={link.path}
-              className={link.path === currentPath ? 'active' : ''}
-            >
-              <Link to={link.path}>{link.label}</Link>
+            <li key={link.path}>
+              <NavLink to={link.path} activeClassName="active">
+                {link.label}
+              </NavLink>
             </li>
           ))}
         </ul>
