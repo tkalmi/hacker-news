@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { store, reactReduxFirebaseProps } from './store.js';
 import News from './components/News/News.js';
 import ItemDetails from './components/ItemDetails/ItemDetails.js';
+import UserDetails from './components/UserDetails/UserDetails.js';
 import Header from './components/Header/Header';
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
           <Switch>
             <Route path="/item/:itemId">
               <ItemDetails />
+            </Route>
+            <Route path="/user/:userId">
+              <UserDetails />
             </Route>
             <Route path="/newstories">
               <News />
