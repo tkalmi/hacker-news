@@ -7,17 +7,25 @@ import NewsItem from '../NewsItem/NewsItem.js';
 
 const STORIES_PER_PAGE = 30;
 
+const HEADINGS = {
+  topstories: 'Top Stories',
+  beststories: 'Best Stories',
+  newstories: 'New Stories'
+};
+
 const News = props => {
+  const path = useLocation().pathname.replace('/', '') || 'topstories';
+
   const query = new URLSearchParams(useLocation().search);
   const currentPage = parseInt(query.get('p') ?? 0, 10);
 
-  useFirebaseConnect('v0/topstories');
+  useFirebaseConnect(`v0/${path}`);
 
   // Fetch top stories
-  const topStoryIds = useSelector(state => state.firebase.data.v0?.topstories);
+  const storyIds = useSelector(state => state.firebase.data.v0?.[path]);
 
   // Show spinner animation while loading
-  if (!isLoaded(topStoryIds)) {
+  if (!isLoaded(storyIds)) {
     return 'Loading...';
   }
 
@@ -25,14 +33,14 @@ const News = props => {
   return (
     <section>
       <header>
-        <h1>Today's Top Stories</h1>
+        <h1>{HEADINGS[path]}</h1>
         <nav>
           <Link to={`/?p=${currentPage - 1}`} disabled={currentPage === 0}>
             Prev
           </Link>
           <Link
             to={`/?p=${currentPage + 1}`}
-            disabled={(currentPage + 1) * STORIES_PER_PAGE > topStoryIds.length}
+            disabled={(currentPage + 1) * STORIES_PER_PAGE > storyIds.length}
           >
             Next
           </Link>
@@ -42,7 +50,7 @@ const News = props => {
       <main>
         {/* Pre-load next page's items, but hide them */}
         <ol start={1 + currentPage * STORIES_PER_PAGE}>
-          {topStoryIds
+          {storyIds
             .slice(
               currentPage * STORIES_PER_PAGE,
               (currentPage + 2) * STORIES_PER_PAGE

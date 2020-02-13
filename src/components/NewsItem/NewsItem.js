@@ -15,6 +15,10 @@ const NewsItem = ({ id }) => {
     return 'Loading...';
   }
 
+  if (!story) {
+    return null;
+  }
+
   return (
     <article>
       <header>
