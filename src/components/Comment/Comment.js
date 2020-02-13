@@ -25,10 +25,9 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
   return (
     <article>
       <header>
-        <Author
-          author={comment.by}
-          label={comment.by === originalPoster && `${comment.by} [OP]`}
-        />
+        <Author author={comment.by}>
+          {comment.by === originalPoster && `${comment.by} [OP]`}
+        </Author>
         | <PublishTime time={comment.time} />
       </header>
       <p
