@@ -79,3 +79,17 @@ test('Wraps quotes in <blockquote> tags', () => {
     'Foobar<blockquote> This is a quote</blockquote><blockquote> This is another quote</blockquote>'
   );
 });
+
+test('Extracts hostname from a given URL w/out "www.", or returns undefined for invalid URLs', () => {
+  const invalidUrl = 'foobar.com';
+  expect(utils.extractHostname(invalidUrl)).toBe(undefined);
+
+  const validHostname = 'https://google.com';
+  expect(utils.extractHostname(validHostname)).toEqual('google.com');
+
+  const wwwUrl = 'https://www.google.com/www.foobar';
+  expect(utils.extractHostname(wwwUrl)).toEqual('google.com');
+
+  const multipartUrl = 'https://app.times.now.com/foobar?quux=123';
+  expect(utils.extractHostname(multipartUrl)).toEqual('app.times.now.com');
+});
