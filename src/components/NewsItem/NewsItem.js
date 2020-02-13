@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Author from '../Author';
-import { getTimeDiff, extractHostname } from '../../utils';
+import PublishTime from '../PublishTime';
+import { extractHostname } from '../../utils';
 
 const NewsItem = ({ id }) => {
   useFirebaseConnect(`v0/item/${id}`);
@@ -33,10 +34,8 @@ const NewsItem = ({ id }) => {
       <footer>
         {story.score} Points by
         <Author author={story.by} />
-        <time dateTime={new Date(story.time).toString()}>
-          {getTimeDiff(story.time)}
-        </time>
-        | <Link to={`/item/${id}`}>{story.descendants} comments</Link>
+        <PublishTime time={story.time} /> |
+        <Link to={`/item/${id}`}>{story.descendants} comments</Link>
       </footer>
     </article>
   );

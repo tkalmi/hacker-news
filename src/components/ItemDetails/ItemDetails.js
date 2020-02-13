@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import Author from '../Author';
 import Comment from '../Comment/Comment';
-import { getTimeDiff } from '../../utils';
+import PublishTime from '../PublishTime';
 
 const ItemDetails = props => {
   // Get item id from URL params
@@ -26,10 +26,7 @@ const ItemDetails = props => {
         <footer>
           {story.score} Points by
           <Author author={story.by} />
-          <time dateTime={new Date(story.time).toString()}>
-            {getTimeDiff(story.time)}
-          </time>
-          | {story.descendants} comments
+          <PublishTime time={story.time} /> | {story.descendants} comments
         </footer>
       </header>
 
