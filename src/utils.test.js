@@ -48,3 +48,34 @@ test('Ensures content for <a> to match its href', () => {
     "<p>Malicious <a href='malicious.com'>malicious.com</a></p>"
   );
 });
+
+test('Wraps quotes in <blockquote> tags', () => {
+  const noQuote = '<p>Foobar</p>';
+  expect(utils.addBlockQuotes(noQuote)).toEqual(noQuote);
+
+  const onlyQuote = '&gt; This is a quote';
+  expect(utils.addBlockQuotes(onlyQuote)).toEqual(
+    '<blockquote> This is a quote</blockquote>'
+  );
+
+  const startQuote = '&gt; This is a quote<p>Foobar</p>';
+  expect(utils.addBlockQuotes(startQuote)).toEqual(
+    '<blockquote> This is a quote</blockquote><p>Foobar</p>'
+  );
+
+  const endQuote = 'Foobar<p>&gt; This is a quote</p>';
+  expect(utils.addBlockQuotes(endQuote)).toEqual(
+    'Foobar<blockquote> This is a quote</blockquote>'
+  );
+
+  const middleQuote = 'Foobar<p>&gt; This is a quote</p><p>Foobar</p>';
+  expect(utils.addBlockQuotes(middleQuote)).toEqual(
+    'Foobar<blockquote> This is a quote</blockquote><p>Foobar</p>'
+  );
+
+  const multiQuote =
+    'Foobar<p>&gt; This is a quote</p><p>&gt; This is another quote</p>';
+  expect(utils.addBlockQuotes(multiQuote)).toEqual(
+    'Foobar<blockquote> This is a quote</blockquote><blockquote> This is another quote</blockquote>'
+  );
+});
