@@ -3,9 +3,10 @@ import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import sanitizeHtml from 'sanitize-html';
 
+import Author from '../Author';
 import { addBlockQuotes, ensureHonestLinks } from '../../utils';
 
-const Comment = ({ depth = 0, id }) => {
+const Comment = ({ depth = 0, id, originalPoster }) => {
   const [showMore, setShowMore] = useState(depth < 2);
 
   useFirebaseConnect(`v0/item/${id}`);
@@ -22,6 +23,10 @@ const Comment = ({ depth = 0, id }) => {
 
   return (
     <article>
+      <header>
+        <Author author={comment.by} />
+        {comment.by === originalPoster && '(OP)'}
+      </header>
       <p
         dangerouslySetInnerHTML={{
           __html: comment.deleted

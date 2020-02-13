@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 
+import Author from '../Author';
 import Comment from '../Comment/Comment';
 import { getTimeDiff } from '../../utils';
 
@@ -24,11 +25,7 @@ const ItemDetails = props => {
         <h1>{story.title}</h1>
         <footer>
           {story.score} Points by
-          <address>
-            <Link rel="author" to={`/user/${story.by}`}>
-              {story.by}
-            </Link>
-          </address>
+          <Author author={story.by} />
           <time dateTime={new Date(story.time).toString()}>
             {getTimeDiff(story.time)}
           </time>
