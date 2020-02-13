@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 
@@ -23,7 +23,12 @@ const ItemDetails = props => {
       <header>
         <h1>{story.title}</h1>
         <footer>
-          {story.score} Points by <address>{story.by}</address>{' '}
+          {story.score} Points by
+          <address>
+            <Link rel="author" to={`/user/${story.by}`}>
+              {story.by}
+            </Link>
+          </address>
           <time dateTime={new Date(story.time).toString()}>
             {getTimeDiff(story.time)}
           </time>
@@ -31,17 +36,19 @@ const ItemDetails = props => {
         </footer>
       </header>
 
-      <main>
-        <h2>Comments</h2>
+      {story.kids && (
+        <main>
+          <h2>Comments</h2>
 
-        <ul>
-          {story.kids.map(kid => (
-            <li key={kid}>
-              <Comment id={kid} />
-            </li>
-          ))}
-        </ul>
-      </main>
+          <ul>
+            {story.kids.map(kid => (
+              <li key={kid}>
+                <Comment id={kid} />
+              </li>
+            ))}
+          </ul>
+        </main>
+      )}
     </section>
   );
 };

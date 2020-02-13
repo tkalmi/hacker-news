@@ -30,7 +30,12 @@ const NewsItem = ({ id }) => {
         </h1>
       </header>
       <footer>
-        {story.score} Points by <address>{story.by}</address>{' '}
+        {story.score} Points by
+        <address>
+          <Link rel="author" to={`/user/${story.by}`}>
+            {story.by}
+          </Link>
+        </address>
         <time dateTime={new Date(story.time).toString()}>
           {getTimeDiff(story.time)}
         </time>
