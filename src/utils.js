@@ -23,9 +23,7 @@ export const ensureHonestLinks = htmlStr => {
   let honestStr = htmlStr;
 
   [
-    ...htmlStr.matchAll(
-      /<a\s+(?:[^>]*?\s+)?href=["'](.*?)["']\>(.*?)\<\/a\>/gim
-    )
+    ...htmlStr.matchAll(/<a\s+(?:[^>]*?\s+)?href=["'](.*?)["']>(.*?)<\/a>/gim)
   ].forEach(([aTag, href, linkStr]) => {
     const honestLink = aTag.replace(linkStr, href);
     honestStr = honestStr.replace(aTag, honestLink);
