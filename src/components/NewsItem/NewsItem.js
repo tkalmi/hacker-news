@@ -23,7 +23,7 @@ const NewsItem = ({ id }) => {
     <article>
       <header>
         <h1>
-          <a href={story.url}>{story.title}</a>
+          <a href={story.url || `/item/${id}`}>{story.title}</a>
           {extractHostname(story.url) && (
             <small>({extractHostname(story.url)})</small>
           )}
