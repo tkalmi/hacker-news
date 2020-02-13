@@ -9,6 +9,7 @@ import PublishTime from '../PublishTime';
 
 const Comment = ({ depth = 0, id, originalPoster }) => {
   const [showMore, setShowMore] = useState(depth < 2);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useFirebaseConnect(`v0/item/${id}`);
   // Fetch comment
@@ -16,6 +17,10 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
 
   const handleShowMore = () => {
     setShowMore(true);
+  };
+
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
   };
 
   if (!isLoaded(comment)) {
@@ -29,6 +34,11 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
           {comment.by === originalPoster && `${comment.by} [OP]`}
         </Author>
         | <PublishTime time={comment.time} />
+        {comment.kids?.length && showMore && (
+          <button onClick={toggleCollapse}>
+            {isCollapsed ? '+ Show Thread' : '- Collapse Thread'}
+          </button>
+        )}
       </header>
       <p
         dangerouslySetInnerHTML={{
@@ -42,7 +52,7 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
         (!showMore ? (
           <button onClick={handleShowMore}>More</button>
         ) : (
-          <ul>
+          <ul style={isCollapsed ? { display: 'none' } : {}}>
             {comment.kids.map(kid => (
               <li key={kid}>
                 <Comment depth={depth + 1} id={kid} />
