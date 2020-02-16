@@ -24,17 +24,32 @@ const StatusItem = styled.span`
 const ItemStatusLine = ({ descendants, id, score, time }) => {
   return (
     <LineWrapper>
-      <StatusItem>
+      <StatusItem
+        aria-label={`This item has ${score} point${score === 1 ? 's' : ''}`}
+      >
         <AiOutlineLike aria-hidden="true" />
         {score}
       </StatusItem>
 
-      <StatusItem>
+      <StatusItem
+        aria-label={`This item has ${descendants} comment${
+          descendants === 1 ? 's' : ''
+        }`}
+      >
         <MdChatBubbleOutline aria-hidden="true" />
-        <Link to={`/item/${id}`}>{descendants}</Link>
+        <Link
+          to={`/item/${id}`}
+          aria-label="Open to view comments and other item details"
+        >
+          {descendants}
+        </Link>
       </StatusItem>
 
-      <StatusItem>
+      <StatusItem
+        aria-label={`This item was published at ${new Date(
+          time * 1_000
+        ).toString()}`}
+      >
         <MdAccessTime aria-hidden="true" />
         <PublishTime time={time} />
       </StatusItem>
