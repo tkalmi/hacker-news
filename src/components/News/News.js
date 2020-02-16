@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
 import { Link, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 
 import NewsItem from '../NewsItem/NewsItem.js';
 
@@ -12,6 +13,11 @@ const HEADINGS = {
   beststories: 'Best Stories',
   newstories: 'New Stories'
 };
+
+const List = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
 
 const News = props => {
   const path = useLocation().pathname.replace('/', '') || 'topstories';
@@ -50,7 +56,7 @@ const News = props => {
 
       <main>
         {/* Pre-load next page's items, but hide them */}
-        <ol start={1 + (currentPage - 1) * STORIES_PER_PAGE}>
+        <List>
           {storyIds
             .slice(
               (currentPage - 1) * STORIES_PER_PAGE,
@@ -63,10 +69,13 @@ const News = props => {
                   display: idx >= currentPage * STORIES_PER_PAGE ? 'none' : ''
                 }}
               >
-                <NewsItem id={id} />
+                <NewsItem
+                  id={id}
+                  idx={1 + idx + (currentPage - 1) * STORIES_PER_PAGE}
+                />
               </li>
             ))}
-        </ol>
+        </List>
       </main>
     </section>
   );

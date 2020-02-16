@@ -8,22 +8,22 @@ test('Gets correct time difference from given Unix timestp', () => {
   MockDate.set(SYSTEM_TIME * 1_000);
 
   const secondsAgo = SYSTEM_TIME - 10;
-  expect(utils.getTimeDiff(secondsAgo)).toEqual('10 seconds ago');
+  expect(utils.getTimeDiff(secondsAgo)).toEqual('10s');
 
   const minutesAgo = SYSTEM_TIME - 100;
-  expect(utils.getTimeDiff(minutesAgo)).toEqual('2 minutes ago');
+  expect(utils.getTimeDiff(minutesAgo)).toEqual('2m');
 
   const hoursAgo = SYSTEM_TIME - 7_600;
-  expect(utils.getTimeDiff(hoursAgo)).toEqual('2 hours ago');
+  expect(utils.getTimeDiff(hoursAgo)).toEqual('2h');
 
   const dayAgo = SYSTEM_TIME - 60 * 60 * 24 * 1.43;
-  expect(utils.getTimeDiff(dayAgo)).toEqual('1 day ago');
+  expect(utils.getTimeDiff(dayAgo)).toEqual('1d');
 
   const manyDaysAgo = SYSTEM_TIME - 60 * 60 * 24 * 364;
-  expect(utils.getTimeDiff(manyDaysAgo)).toEqual('364 days ago');
+  expect(utils.getTimeDiff(manyDaysAgo)).toEqual('364d');
 
   const yearsAgo = SYSTEM_TIME - 60 * 60 * 24 * 365 * 2;
-  expect(utils.getTimeDiff(yearsAgo)).toEqual('2 years ago');
+  expect(utils.getTimeDiff(yearsAgo)).toEqual('2y');
 });
 
 test('Ensures content for <a> to match its href', () => {
