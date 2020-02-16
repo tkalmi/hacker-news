@@ -55,7 +55,11 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
           <ul style={isCollapsed ? { display: 'none' } : {}}>
             {comment.kids.map(kid => (
               <li key={kid}>
-                <Comment depth={depth + 1} id={kid} />
+                <Comment
+                  depth={depth + 1}
+                  id={kid}
+                  originalPoster={originalPoster}
+                />
               </li>
             ))}
           </ul>
