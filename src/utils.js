@@ -3,19 +3,19 @@ export const getTimeDiff = time => {
   const diff = currentTime - time;
   if (diff < 60) {
     const parsed = Math.round(diff);
-    return `${parsed} second${parsed > 1 ? 's' : ''} ago`;
+    return `${parsed}s`;
   } else if (diff < 3_600) {
     const parsed = Math.round(diff / 60);
-    return `${parsed} minute${parsed > 1 ? 's' : ''} ago`;
+    return `${parsed}m`;
   } else if (diff < 86_400) {
     const parsed = Math.round(diff / 3_600);
-    return `${parsed} hour${parsed > 1 ? 's' : ''} ago`;
+    return `${parsed}h`;
   } else if (diff < 31_536_000) {
     const parsed = Math.round(diff / 86_400);
-    return `${parsed} day${parsed > 1 ? 's' : ''} ago`;
+    return `${parsed}d`;
   }
   const parsed = Math.round(diff / 31_536_000);
-  return `${parsed} year${parsed > 1 ? 's' : ''} ago`;
+  return `${parsed}y`;
 };
 
 export const ensureHonestLinks = htmlStr => {
