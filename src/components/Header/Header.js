@@ -1,5 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import { FaGithub } from 'react-icons/fa';
+
+import Logo from './favicon-128.png';
 
 const LINKS = [
   { path: '/', label: 'Top' },
@@ -7,21 +11,75 @@ const LINKS = [
   { path: '/beststories', label: 'Best' }
 ];
 
+const HeaderElement = styled.header`
+  position: sticky;
+  top: 0;
+`;
+
+const NavBar = styled.nav`
+  background: lime;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+
+  h1 {
+    margin: 0;
+    font-size: ${props => props.theme.normalFontSize};
+  }
+
+  h1 img {
+    height: ${props => props.theme.normalFontSize};
+    margin-right: 5px;
+    width: ${props => props.theme.normalFontSize};
+  }
+
+  .github {
+    color: black !important;
+  }
+`;
+
+const LinkList = styled.ul`
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: 0 10px;
+  }
+
+  .active {
+    background-color: white !important;
+  }
+`;
+
 const Header = props => {
   return (
-    <header>
-      <nav>
-        <ul>
+    <HeaderElement>
+      <NavBar>
+        <h1>
+          <img src={Logo} aria-hidden="true" alt="" />
+          Hacker News
+        </h1>
+        <LinkList>
           {LINKS.map(link => (
             <li key={link.path}>
-              <NavLink to={link.path} activeClassName="active">
+              <NavLink exact to={link.path} activeClassName="active">
                 {link.label}
               </NavLink>
             </li>
           ))}
-        </ul>
-      </nav>
-    </header>
+        </LinkList>
+        <a
+          className="github"
+          href="https://github.com/tkalmi/hacker-news"
+          aria-label="See the source code on github.com"
+        >
+          <FaGithub aria-label="Github logo" />
+        </a>
+      </NavBar>
+    </HeaderElement>
   );
 };
 
