@@ -22,7 +22,9 @@ const ItemDetails = props => {
   return (
     <section>
       <header>
-        <h1>{story.title}</h1>
+        <h1>
+          {story.url ? <a href={story.url}>{story.title}</a> : story.title}
+        </h1>
         <footer>
           {story.score} Points by
           <Author author={story.by} />
@@ -37,7 +39,7 @@ const ItemDetails = props => {
           <ul>
             {story.kids.map(kid => (
               <li key={kid}>
-                <Comment id={kid} />
+                <Comment id={kid} originalPoster={story.by} />
               </li>
             ))}
           </ul>
