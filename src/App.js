@@ -10,6 +10,7 @@ import ItemDetails from './components/ItemDetails/ItemDetails.js';
 import UserDetails from './components/UserDetails/UserDetails.js';
 import Header from './components/Header/Header';
 import { standardTheme } from './theme.js';
+import ScrollToTop from './components/ScrollToTop.js';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <ReactReduxFirebaseProvider {...reactReduxFirebaseProps}>
         <BrowserRouter>
           <ThemeProvider theme={standardTheme}>
+            <ScrollToTop />
             <Header />
             <Switch>
               <Route path="/item/:itemId">
