@@ -81,6 +81,9 @@ test('Wraps quotes in <blockquote> tags', () => {
 });
 
 test('Extracts hostname from a given URL w/out "www.", or returns undefined for invalid URLs', () => {
+  const emptyUrl = undefined;
+  expect(utils.extractHostname(emptyUrl)).toBe('news.ycombinator.com');
+
   const invalidUrl = 'foobar.com';
   expect(utils.extractHostname(invalidUrl)).toBe(undefined);
 

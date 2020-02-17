@@ -54,6 +54,9 @@ export const addBlockQuotes = htmlStr => {
 };
 
 export const extractHostname = url => {
+  if (!url) {
+    return 'news.ycombinator.com';
+  }
   // And strip possible 'www.' at the start
   try {
     return new URL(url).hostname.replace(/^www\./, '');
