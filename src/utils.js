@@ -43,9 +43,9 @@ export const addBlockQuotes = htmlStr => {
   ].forEach(([fullQuote, gt1, quote1, gt2, quote2, p]) => {
     let blockQuote;
     if (quote1) {
-      blockQuote = `<blockquote>${quote1}</blockquote>`;
+      blockQuote = `<blockquote>${quote1.trim()}</blockquote>`;
     } else if (quote2) {
-      blockQuote = `<blockquote>${quote2}</blockquote>`;
+      blockQuote = `<blockquote>${quote2.trim()}</blockquote>`;
     }
     if (p) {
       blockQuote += p;
