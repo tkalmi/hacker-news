@@ -7,6 +7,7 @@ import Author from '../Author';
 import { extractHostname } from '../../utils';
 import ItemStatusLine from '../ItemStatusLine';
 import Loader from '../Loader/Loader';
+import Separator from '../Separator';
 
 const Article = styled.article`
   background: #feffff;
@@ -21,23 +22,6 @@ const Heading = styled.h1`
   font-size: ${props => props.theme.normalFontSize};
   line-height: 1.5;
   margin-bottom: 0;
-`;
-
-const Separator = styled.span`
-  padding: 0 8px;
-  position: relative;
-
-  &::after {
-    background: gray;
-    border-radius: 50%;
-    content: '';
-    height: 4px;
-    position: absolute;
-    top: 0.7em; // Taking line-height into account
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 4px;
-  }
 `;
 
 const Footer = styled.footer`
