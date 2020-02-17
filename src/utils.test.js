@@ -58,6 +58,9 @@ test('Wraps quotes in <blockquote> tags', () => {
     '<blockquote> This is a quote</blockquote>'
   );
 
+  const notAQuote = `A -&gt; B -&gt; C`;
+  expect(utils.addBlockQuotes(notAQuote)).toEqual(notAQuote);
+
   const startQuote = '&gt; This is a quote<p>Foobar</p>';
   expect(utils.addBlockQuotes(startQuote)).toEqual(
     '<blockquote> This is a quote</blockquote><p>Foobar</p>'
