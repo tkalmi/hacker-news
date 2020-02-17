@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Author from '../Author';
 import { extractHostname } from '../../utils';
 import ItemStatusLine from '../ItemStatusLine';
+import Loader from '../Loader/Loader';
 
 const Article = styled.article`
   background: #feffff;
@@ -66,7 +67,11 @@ const NewsItem = ({ id, idx }) => {
   const story = useSelector(state => state.firebase.data.v0?.item?.[id]);
 
   if (!isLoaded(story)) {
-    return 'Loading...';
+    return (
+      <Article>
+        <Loader />
+      </Article>
+    );
   }
 
   if (!story) {
