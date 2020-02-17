@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { FaGithub } from 'react-icons/fa';
 
 import Logo from './favicon-128.png';
+import Container from '../Container';
 
 const LINKS = [
   { path: '/', label: 'Top' },
@@ -12,15 +13,15 @@ const LINKS = [
 ];
 
 const HeaderElement = styled.header`
+  background: lime;
+  padding: 5px;
   position: sticky;
   top: 0;
 `;
 
 const NavBar = styled.nav`
-  background: lime;
   display: flex;
   justify-content: space-between;
-  padding: 5px;
 
   h1 {
     margin: 0;
@@ -57,30 +58,32 @@ const LinkList = styled.ul`
 const Header = props => {
   return (
     <HeaderElement>
-      <NavBar>
-        <h1>
-          <Link to="/">
-            <img src={Logo} aria-hidden="true" alt="" />
-            Hacker News
-          </Link>
-        </h1>
-        <LinkList>
-          {LINKS.map(link => (
-            <li key={link.path}>
-              <NavLink exact to={link.path} activeClassName="active">
-                {link.label}
-              </NavLink>
-            </li>
-          ))}
-        </LinkList>
-        <a
-          className="github"
-          href="https://github.com/tkalmi/hacker-news"
-          aria-label="See the source code on github.com"
-        >
-          <FaGithub aria-label="Github logo" />
-        </a>
-      </NavBar>
+      <Container>
+        <NavBar>
+          <h1>
+            <Link to="/">
+              <img src={Logo} aria-hidden="true" alt="" />
+              Hacker News
+            </Link>
+          </h1>
+          <LinkList>
+            {LINKS.map(link => (
+              <li key={link.path}>
+                <NavLink exact to={link.path} activeClassName="active">
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
+          </LinkList>
+          <a
+            className="github"
+            href="https://github.com/tkalmi/hacker-news"
+            aria-label="See the source code on github.com"
+          >
+            <FaGithub aria-label="Github logo" />
+          </a>
+        </NavBar>
+      </Container>
     </HeaderElement>
   );
 };

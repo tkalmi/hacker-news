@@ -11,6 +11,7 @@ import UserDetails from './components/UserDetails/UserDetails.js';
 import Header from './components/Header/Header';
 import { standardTheme } from './theme.js';
 import ScrollToTop from './components/ScrollToTop.js';
+import Container from './components/Container.js';
 
 function App() {
   return (
@@ -20,23 +21,25 @@ function App() {
           <ThemeProvider theme={standardTheme}>
             <ScrollToTop />
             <Header />
-            <Switch>
-              <Route path="/item/:itemId">
-                <ItemDetails />
-              </Route>
-              <Route path="/user/:userId">
-                <UserDetails />
-              </Route>
-              <Route path="/newstories">
-                <News />
-              </Route>
-              <Route path="/beststories">
-                <News />
-              </Route>
-              <Route path="/">
-                <News />
-              </Route>
-            </Switch>
+            <Container>
+              <Switch>
+                <Route path="/item/:itemId">
+                  <ItemDetails />
+                </Route>
+                <Route path="/user/:userId">
+                  <UserDetails />
+                </Route>
+                <Route path="/newstories">
+                  <News />
+                </Route>
+                <Route path="/beststories">
+                  <News />
+                </Route>
+                <Route path="/">
+                  <News />
+                </Route>
+              </Switch>
+            </Container>
           </ThemeProvider>
         </BrowserRouter>
       </ReactReduxFirebaseProvider>

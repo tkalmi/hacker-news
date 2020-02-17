@@ -5,17 +5,29 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import NewsItem from '../NewsItem/NewsItem.js';
+import Container from '../Container.js';
 
 const STORIES_PER_PAGE = 30;
 
 const List = styled.ul`
   list-style: none;
+  margin-bottom: 32px;
   padding: 0;
 `;
 
 const FooterNav = styled.footer`
   background-color: orange;
+  bottom: 0;
+  left: 0;
   padding: 5px;
+  position: fixed;
+  width: 100vw;
+
+  a[disabled] {
+    color: gray !important;
+    pointer-events: none;
+    text-decoration: none;
+  }
 `;
 
 const News = props => {
@@ -43,46 +55,49 @@ const News = props => {
           {storyIds
             .slice(
               (currentPage - 1) * STORIES_PER_PAGE,
-              (currentPage + 1) * STORIES_PER_PAGE
+              (currentPage + 2) * STORIES_PER_PAGE
             )
-            .map((id, idx) => (
-              <li
-                key={id}
-                style={{
-                  display: (currentPage === 1
-                  ? idx < 30
-                  : 30 <= idx && idx < 60)
-                    ? ''
-                    : 'none'
-                }}
-              >
-                <NewsItem
-                  id={id}
-                  idx={1 + idx + (currentPage - 1) * STORIES_PER_PAGE}
-                />
-              </li>
-            ))}
+            .map((id, idx) => {
+              const isVisible =
+                currentPage === 1
+                  ? idx < STORIES_PER_PAGE
+                  : STORIES_PER_PAGE <= idx && idx < STORIES_PER_PAGE * 2;
+              return (
+                <li
+                  key={id}
+                  aria-hidden={!isVisible}
+                  style={{
+                    display: isVisible ? '' : 'none'
+                  }}
+                >
+                  <NewsItem
+                    id={id}
+                    idx={1 + idx + (currentPage - 1) * STORIES_PER_PAGE}
+                  />
+                </li>
+              );
+            })}
         </List>
       </main>
       <FooterNav>
-        <nav>
-          {currentPage > 1 && (
+        <Container>
+          <nav>
             <Link
+              disabled={currentPage < 2}
               to={location => `${location.pathname}?p=${currentPage - 1}`}
               aria-label="Go to previous set of stories"
             >
               Previous
-            </Link>
-          )}{' '}
-          {(currentPage + 1) * STORIES_PER_PAGE <= storyIds.length && (
+            </Link>{' '}
             <Link
+              disabled={(currentPage + 1) * STORIES_PER_PAGE > storyIds.length}
               to={location => `${location.pathname}?p=${currentPage + 1}`}
               aria-label="Show more stories"
             >
               More
             </Link>
-          )}
-        </nav>
+          </nav>
+        </Container>
       </FooterNav>
     </section>
   );
