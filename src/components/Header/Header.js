@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaGithub } from 'react-icons/fa';
 
@@ -59,12 +59,10 @@ const Header = props => {
   return (
     <HeaderElement>
       <Container>
-        <NavBar>
+        <NavBar aria-label="Navigate between different lists of stories">
           <h1>
-            <Link to="/">
-              <img src={Logo} aria-hidden="true" alt="" />
-              Hacker News
-            </Link>
+            <img src={Logo} aria-hidden="true" alt="" />
+            Hacker News
           </h1>
           <LinkList>
             {LINKS.map(link => (

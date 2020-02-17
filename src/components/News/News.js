@@ -9,7 +9,7 @@ import Container from '../Container.js';
 
 const STORIES_PER_PAGE = 30;
 
-const List = styled.ul`
+const List = styled.ol`
   list-style: none;
   margin-bottom: 32px;
   padding: 0;
@@ -51,7 +51,7 @@ const News = props => {
     <section>
       <main>
         {/* Pre-load next page's items, but hide them */}
-        <List>
+        <List start={(currentPage - 1) * STORIES_PER_PAGE + 1}>
           {storyIds
             .slice(
               (currentPage - 1) * STORIES_PER_PAGE,
@@ -81,7 +81,7 @@ const News = props => {
       </main>
       <FooterNav>
         <Container>
-          <nav>
+          <nav aria-label="Change to previous or next page">
             <Link
               disabled={currentPage < 2}
               to={location => `${location.pathname}?p=${currentPage - 1}`}
@@ -94,7 +94,7 @@ const News = props => {
               to={location => `${location.pathname}?p=${currentPage + 1}`}
               aria-label="Show more stories"
             >
-              More
+              Next
             </Link>
           </nav>
         </Container>
