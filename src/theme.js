@@ -1,6 +1,6 @@
 const typography = {
   smallFontSize: '12px',
-  normalFontSize: '16px',
+  normalFontSize: '14px',
   largeFontSize: '18px'
 };
 
