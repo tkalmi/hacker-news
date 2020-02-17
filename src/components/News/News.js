@@ -8,15 +8,14 @@ import NewsItem from '../NewsItem/NewsItem.js';
 
 const STORIES_PER_PAGE = 30;
 
-const HEADINGS = {
-  topstories: 'Top Stories',
-  beststories: 'Best Stories',
-  newstories: 'New Stories'
-};
-
 const List = styled.ul`
   list-style: none;
   padding: 0;
+`;
+
+const FooterNav = styled.footer`
+  background-color: orange;
+  padding: 5px;
 `;
 
 const News = props => {
@@ -38,22 +37,6 @@ const News = props => {
   // Render news items in a list of NewsItem component
   return (
     <section>
-      <header>
-        <h1>{HEADINGS[path]}</h1>
-        <nav>
-          {currentPage > 1 && (
-            <Link to={location => `${location.pathname}?p=${currentPage - 1}`}>
-              Prev
-            </Link>
-          )}
-          {(currentPage + 1) * STORIES_PER_PAGE <= storyIds.length && (
-            <Link to={location => `${location.pathname}?p=${currentPage + 1}`}>
-              Next
-            </Link>
-          )}
-        </nav>
-      </header>
-
       <main>
         {/* Pre-load next page's items, but hide them */}
         <List>
@@ -66,7 +49,11 @@ const News = props => {
               <li
                 key={id}
                 style={{
-                  display: idx >= currentPage * STORIES_PER_PAGE ? 'none' : ''
+                  display: (currentPage === 1
+                  ? idx < 30
+                  : 30 <= idx && idx < 60)
+                    ? ''
+                    : 'none'
                 }}
               >
                 <NewsItem
@@ -77,6 +64,26 @@ const News = props => {
             ))}
         </List>
       </main>
+      <FooterNav>
+        <nav>
+          {currentPage > 1 && (
+            <Link
+              to={location => `${location.pathname}?p=${currentPage - 1}`}
+              aria-label="Go to previous set of stories"
+            >
+              Previous
+            </Link>
+          )}{' '}
+          {(currentPage + 1) * STORIES_PER_PAGE <= storyIds.length && (
+            <Link
+              to={location => `${location.pathname}?p=${currentPage + 1}`}
+              aria-label="Show more stories"
+            >
+              More
+            </Link>
+          )}
+        </nav>
+      </FooterNav>
     </section>
   );
 };
