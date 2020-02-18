@@ -11,6 +11,10 @@ import CommentList from '../Comment/CommentList';
 import StoryDetailsFooter from '../StoryDetailsFooter';
 import Loader from '../Loader/Loader';
 
+const LoaderSection = styled.section`
+  margin-top: 10px;
+`;
+
 const StoryDescription = styled.p`
   background-color: ${props => props.theme.lightAccentColor};
   padding: 0 5px;
@@ -22,15 +26,13 @@ const ItemDetails = props => {
 
   useFirebaseConnect(`v0/item/${itemId}`);
   // Fetch story
-  const { id, ...story } = useSelector(
-    state => state.firebase.data.v0?.item?.[itemId]
-  );
+  const story = useSelector(state => state.firebase.data.v0?.item?.[itemId]);
 
   if (!isLoaded(story)) {
     return (
-      <section>
+      <LoaderSection>
         <Loader />
-      </section>
+      </LoaderSection>
     );
   }
 
@@ -40,7 +42,7 @@ const ItemDetails = props => {
         <h1>
           {story.url ? <a href={story.url}>{story.title}</a> : story.title}
         </h1>
-        <StoryDetailsFooter {...story} compact={true} />
+        <StoryDetailsFooter {...story} id={undefined} compact={true} />
 
         {story.text && (
           <StoryDescription
