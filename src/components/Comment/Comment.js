@@ -46,6 +46,20 @@ const CommentDetails = styled.div`
     align-items: center;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  > p {
+    margin-top: 4px;
+  }
+`;
+
+const Button = styled.button`
+  align-items: center;
+  display: flex;
+
+  &:active {
+    color: white;
   }
 `;
 
@@ -81,7 +95,7 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
             <PublishTime time={comment.time} />
           </div>
           {comment.kids?.length && showMore && (
-            <button onClick={toggleCollapse}>
+            <Button onClick={toggleCollapse}>
               {isCollapsed ? (
                 <>
                   <FiChevronsRight />
@@ -93,7 +107,7 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
                   Collapse
                 </>
               )}
-            </button>
+            </Button>
           )}
         </header>
         <p
@@ -107,7 +121,7 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
 
       {comment.kids?.length &&
         (!showMore ? (
-          <button onClick={handleShowMore}>More</button>
+          <Button onClick={handleShowMore}>More</Button>
         ) : (
           <CommentList>
             {comment.kids.map(kid => (
