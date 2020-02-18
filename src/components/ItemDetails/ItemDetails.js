@@ -9,6 +9,7 @@ import { addBlockQuotes, ensureHonestLinks } from '../../utils';
 import Comment from '../Comment/Comment';
 import CommentList from '../Comment/CommentList';
 import StoryDetailsFooter from '../StoryDetailsFooter';
+import Loader from '../Loader/Loader';
 
 const StoryDescription = styled.p`
   background-color: ${props => props.theme.lightAccentColor};
@@ -26,7 +27,11 @@ const ItemDetails = props => {
   );
 
   if (!isLoaded(story)) {
-    return 'Loading...';
+    return (
+      <section>
+        <Loader />
+      </section>
+    );
   }
 
   return (
