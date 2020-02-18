@@ -11,7 +11,7 @@ const Article = styled.article`
 
   box-shadow: 20px 20px 60px #d8d9d9, -20px -20px 60px #ffffff;
 
-  margin-bottom: 4px;
+  margin: 0 -10px 4px;
   padding: 5px 15px 10px;
 `;
 
