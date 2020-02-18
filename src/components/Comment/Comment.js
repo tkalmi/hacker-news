@@ -10,6 +10,7 @@ import { addBlockQuotes, ensureHonestLinks } from '../../utils';
 import PublishTime from '../PublishTime';
 import CommentList from './CommentList';
 import Separator from '../Separator';
+import Loader from '../Loader/Loader';
 
 const COMMENT_COLORS = ['lime', 'red', 'orange', 'yellow'];
 
@@ -46,7 +47,7 @@ const CommentDetails = styled.div`
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   > p {
@@ -57,6 +58,7 @@ const CommentDetails = styled.div`
 const Button = styled.button`
   align-items: center;
   display: flex;
+  margin-bottom: 5px;
 
   &:active {
     color: white;
@@ -80,7 +82,11 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
   };
 
   if (!isLoaded(comment)) {
-    return 'Loading...';
+    return (
+      <CommentContainer>
+        <Loader />
+      </CommentContainer>
+    );
   }
 
   return (
