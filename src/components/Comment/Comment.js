@@ -45,7 +45,9 @@ const CommentDetails = styled.div`
 
   > header {
     align-items: center;
+    color: ${props => props.theme.lightFontColor};
     display: flex;
+    font-size: ${props => props.theme.normalFontSize};
     justify-content: space-between;
     margin-bottom: 5px;
   }
@@ -108,12 +110,12 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
             <Button onClick={toggleCollapse}>
               {isCollapsed ? (
                 <>
-                  <FiChevronsRight />
+                  <FiChevronsRight aria-hidden="true" />
                   Show
                 </>
               ) : (
                 <>
-                  <FiChevronsUp />
+                  <FiChevronsUp aria-hidden="true" />
                   Collapse
                 </>
               )}
