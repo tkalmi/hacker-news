@@ -17,19 +17,22 @@ const LINKS = [
 
 const HeaderElement = styled.header`
   background: ${props => props.theme.accentColor};
-  padding: 5px;
+  padding: 5px 0;
   position: sticky;
   top: 0;
   z-index: 1;
 `;
 
 const NavBar = styled.nav`
+  align-items: center;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 
   h1 {
-    margin: 0;
+    margin: 0 20px 0 0;
     font-size: ${props => props.theme.normalFontSize};
+    white-space: nowrap;
   }
 
   h1 img {
@@ -51,7 +54,16 @@ const LinkList = styled.ul`
   padding: 0;
 
   li {
-    padding: 0 10px;
+    font-size: ${props => props.theme.normalFontSize};
+    padding: 4px 8px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
   }
 
   .active {
@@ -76,14 +88,16 @@ const Header = props => {
                 </NavLink>
               </li>
             ))}
+            <li>
+              <a
+                className="github"
+                href="https://github.com/tkalmi/hacker-news"
+                aria-label="See the source code on github.com"
+              >
+                <FaGithub aria-label="Github logo" />
+              </a>
+            </li>
           </LinkList>
-          <a
-            className="github"
-            href="https://github.com/tkalmi/hacker-news"
-            aria-label="See the source code on github.com"
-          >
-            <FaGithub aria-label="Github logo" />
-          </a>
         </NavBar>
       </Container>
     </HeaderElement>
