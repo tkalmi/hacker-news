@@ -3,14 +3,11 @@ import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import Author from '../Author';
-import { extractHostname } from '../../utils';
-import ItemStatusLine from '../ItemStatusLine';
 import Loader from '../Loader/Loader';
-import Separator from '../Separator';
+import StoryDetailsFooter from '../StoryDetailsFooter';
 
 const Article = styled.article`
-  background: #feffff;
+  background: ${props => props.theme.cardBgColor};
 
   box-shadow: 20px 20px 60px #d8d9d9, -20px -20px 60px #ffffff;
 
@@ -22,26 +19,6 @@ const Heading = styled.h1`
   font-size: ${props => props.theme.normalFontSize};
   line-height: 1.5;
   margin-bottom: 0;
-`;
-
-const Footer = styled.footer`
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  font-size: ${props => props.theme.normalFontSize};
-  justify-content: space-between;
-
-  > * {
-    margin-top: 10px;
-  }
-
-  > .publishers {
-    background: #eee;
-    border-radius: 3px;
-    color: #515151;
-    margin-right: 10px;
-    padding: 3px 5px;
-  }
 `;
 
 const NewsItem = ({ id, idx }) => {
@@ -69,14 +46,7 @@ const NewsItem = ({ id, idx }) => {
           {idx}. <a href={story.url || `/item/${id}`}>{story.title}</a>
         </Heading>
       </header>
-      <Footer>
-        <div className="publishers">
-          {extractHostname(story.url)}
-          <Separator />
-          <Author author={story.by} />
-        </div>
-        <ItemStatusLine {...story} id={id} />
-      </Footer>
+      <StoryDetailsFooter {...story} id={id} />
     </Article>
   );
 };

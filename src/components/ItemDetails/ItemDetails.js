@@ -2,11 +2,18 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
+import sanitizeHtml from 'sanitize-html';
+import styled from 'styled-components';
 
-import Author from '../Author';
+import { addBlockQuotes, ensureHonestLinks } from '../../utils';
 import Comment from '../Comment/Comment';
-import PublishTime from '../PublishTime';
 import CommentList from '../Comment/CommentList';
+import StoryDetailsFooter from '../StoryDetailsFooter';
+
+const StoryDescription = styled.p`
+  background-color: ${props => props.theme.lightAccentColor};
+  padding: 0 5px;
+`;
 
 const ItemDetails = props => {
   // Get item id from URL params
@@ -14,7 +21,9 @@ const ItemDetails = props => {
 
   useFirebaseConnect(`v0/item/${itemId}`);
   // Fetch story
-  const story = useSelector(state => state.firebase.data.v0?.item?.[itemId]);
+  const { id, ...story } = useSelector(
+    state => state.firebase.data.v0?.item?.[itemId]
+  );
 
   if (!isLoaded(story)) {
     return 'Loading...';
@@ -26,11 +35,17 @@ const ItemDetails = props => {
         <h1>
           {story.url ? <a href={story.url}>{story.title}</a> : story.title}
         </h1>
-        <footer>
-          {story.score} Points by
-          <Author author={story.by} />
-          <PublishTime time={story.time} /> | {story.descendants} comments
-        </footer>
+        <StoryDetailsFooter {...story} compact={true} />
+
+        {story.text && (
+          <StoryDescription
+            dangerouslySetInnerHTML={{
+              __html: story.deleted
+                ? '[DELETED]'
+                : addBlockQuotes(ensureHonestLinks(sanitizeHtml(story.text)))
+            }}
+          ></StoryDescription>
+        )}
       </header>
 
       {story.kids && (
