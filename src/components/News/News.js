@@ -24,11 +24,16 @@ const FooterNav = styled.footer`
   padding: 5px;
   position: fixed;
   width: 100vw;
+  z-index: 1;
 
-  a[disabled] {
-    color: ${props => props.theme.lightFontColor} !important;
-    pointer-events: none;
-    text-decoration: none;
+  a {
+    padding: 0 5px;
+
+    &[disabled] {
+      color: ${props => props.theme.lightFontColor} !important;
+      pointer-events: none;
+      text-decoration: none;
+    }
   }
 `;
 
