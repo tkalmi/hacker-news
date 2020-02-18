@@ -5,7 +5,7 @@ const Separator = styled.span`
   position: relative;
 
   &::after {
-    background: gray;
+    background: ${props => props.theme.lightFontColor};
     border-radius: 50%;
     content: '';
     height: 4px;
