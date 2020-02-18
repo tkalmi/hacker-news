@@ -65,10 +65,7 @@ const News = props => {
               (currentPage + 2) * STORIES_PER_PAGE
             )
             .map((id, idx) => {
-              const isVisible =
-                currentPage === 1
-                  ? idx < STORIES_PER_PAGE
-                  : STORIES_PER_PAGE <= idx && idx < STORIES_PER_PAGE * 2;
+              const isVisible = idx < STORIES_PER_PAGE;
               return (
                 <li
                   key={id}
