@@ -14,20 +14,43 @@ import ScrollToTop from './components/ScrollToTop.js';
 import Container from './components/Container.js';
 
 const GlobalStyling = createGlobalStyle`
-html {
-  color: #333;
-}
-  p {
+  html {
+    color: ${props => props.theme.darkFontColor};
+  }
+
+  h1, h2 {
+    font-size: ${props => props.theme.largeFontSize};
+  }
+
+  p, footer, button{
     font-size: ${props => props.theme.normalFontSize};
     line-height: 1.35;
   }
 
+  a {
+    color: ${props => props.theme.linkColor};
+    word-wrap: break-word;
+
+    &:visited {
+      color: ${props => props.theme.linkVisitedColor};
+    }
+  }
+
+  button {
+    cursor: pointer;
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
+  }
+
   pre {
-    background: lightgrey;
+    background: ${props => props.theme.lightBgColor};
     overflow: scroll;
   }
 
   blockquote {
+    font-style: italic;
     quotes: "“" "”" "‘" "’";
 
     &::before {
