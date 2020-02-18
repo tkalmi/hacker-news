@@ -92,7 +92,7 @@ const Header = props => {
               <a
                 className="github"
                 href="https://github.com/tkalmi/hacker-news"
-                aria-label="See the source code on github.com"
+                title="See the source code on github.com"
               >
                 <FaGithub aria-label="Github logo" />
               </a>
