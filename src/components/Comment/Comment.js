@@ -94,9 +94,13 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
       <CommentDetails depth={depth}>
         <header>
           <div>
-            <Author author={comment.by}>
-              {comment.by === originalPoster && `${comment.by} [OP]`}
-            </Author>
+            {comment.deleted ? (
+              '[DELETED]'
+            ) : (
+              <Author author={comment.by}>
+                {comment.by === originalPoster && `${comment.by} [OP]`}
+              </Author>
+            )}
             <Separator />
             <PublishTime time={comment.time} />
           </div>
