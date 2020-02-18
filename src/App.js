@@ -85,6 +85,15 @@ function App() {
                 <Route path="/beststories">
                   <News />
                 </Route>
+                <Route path="/askstories">
+                  <News />
+                </Route>
+                <Route path="/showstories">
+                  <News />
+                </Route>
+                <Route path="/jobstories">
+                  <News />
+                </Route>
                 <Route path="/">
                   <News />
                 </Route>

@@ -9,11 +9,14 @@ import Container from '../Container';
 const LINKS = [
   { path: '/', label: 'Top' },
   { path: '/newstories', label: 'New' },
-  { path: '/beststories', label: 'Best' }
+  { path: '/beststories', label: 'Best' },
+  { path: '/showstories', label: 'Show' },
+  { path: '/askstories', label: 'Ask' },
+  { path: '/jobstories', label: 'Job' }
 ];
 
 const HeaderElement = styled.header`
-  background: lime;
+  background: ${props => props.theme.accentColor};
   padding: 5px;
   position: sticky;
   top: 0;
@@ -36,7 +39,7 @@ const NavBar = styled.nav`
   }
 
   .github {
-    color: black !important;
+    color: ${props => props.theme.githubColor} !important;
   }
 `;
 
