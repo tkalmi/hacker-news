@@ -20,6 +20,7 @@ const GlobalStyling = createGlobalStyle`
 
   h1, h2 {
     font-size: ${props => props.theme.largeFontSize};
+    line-height: 1.35;
   }
 
   p, footer, button{
@@ -51,6 +52,7 @@ const GlobalStyling = createGlobalStyle`
 
   blockquote {
     font-style: italic;
+    margin-left: 15px;
     quotes: "“" "”" "‘" "’";
 
     &::before {
