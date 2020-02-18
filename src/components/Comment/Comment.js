@@ -3,6 +3,7 @@ import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import sanitizeHtml from 'sanitize-html';
 import styled from 'styled-components';
+import { FiChevronsRight, FiChevronsUp } from 'react-icons/fi';
 
 import Author from '../Author';
 import { addBlockQuotes, ensureHonestLinks } from '../../utils';
@@ -15,6 +16,13 @@ const COMMENT_COLORS = ['lime', 'red', 'orange', 'yellow'];
 const CommentContainer = styled.article`
   border-top: 1px solid lightgray;
   padding-top: 10px;
+
+  &.collapsed {
+    p,
+    ul {
+      display: none;
+    }
+  }
 `;
 
 const CommentDetails = styled.div`
@@ -28,10 +36,16 @@ const CommentDetails = styled.div`
     border-radius: 2px;
     content: '';
     height: 100%;
-    left: -10px;
+    left: -15px;
     position: absolute;
     top: 0;
     width: 3px;
+  }
+
+  > header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
   }
 `;
 
@@ -56,17 +70,29 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
   }
 
   return (
-    <CommentContainer>
+    <CommentContainer className={isCollapsed ? 'collapsed' : ''}>
       <CommentDetails depth={depth}>
         <header>
-          <Author author={comment.by}>
-            {comment.by === originalPoster && `${comment.by} [OP]`}
-          </Author>
-          <Separator />
-          <PublishTime time={comment.time} />
+          <div>
+            <Author author={comment.by}>
+              {comment.by === originalPoster && `${comment.by} [OP]`}
+            </Author>
+            <Separator />
+            <PublishTime time={comment.time} />
+          </div>
           {comment.kids?.length && showMore && (
             <button onClick={toggleCollapse}>
-              {isCollapsed ? '+ Show Thread' : '- Collapse Thread'}
+              {isCollapsed ? (
+                <>
+                  <FiChevronsRight />
+                  Show
+                </>
+              ) : (
+                <>
+                  <FiChevronsUp />
+                  Collapse
+                </>
+              )}
             </button>
           )}
         </header>
@@ -83,7 +109,7 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
         (!showMore ? (
           <button onClick={handleShowMore}>More</button>
         ) : (
-          <CommentList style={isCollapsed ? { display: 'none' } : {}}>
+          <CommentList>
             {comment.kids.map(kid => (
               <li key={kid}>
                 <Comment
