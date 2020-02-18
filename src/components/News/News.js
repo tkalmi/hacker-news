@@ -16,15 +16,17 @@ const List = styled.ol`
 `;
 
 const FooterNav = styled.footer`
-  background-color: orange;
+  background-color: ${props => props.theme.secondaryAccentColor};
   bottom: 0;
+  display: flex;
+  justify-content: center;
   left: 0;
   padding: 5px;
   position: fixed;
   width: 100vw;
 
   a[disabled] {
-    color: gray !important;
+    color: ${props => props.theme.lightFontColor} !important;
     pointer-events: none;
     text-decoration: none;
   }
@@ -90,7 +92,7 @@ const News = props => {
               Previous
             </Link>{' '}
             <Link
-              disabled={(currentPage + 1) * STORIES_PER_PAGE > storyIds.length}
+              disabled={(currentPage + 1) * STORIES_PER_PAGE >= storyIds.length}
               to={location => `${location.pathname}?p=${currentPage + 1}`}
               aria-label="Show more stories"
             >
