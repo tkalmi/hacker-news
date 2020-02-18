@@ -36,19 +36,22 @@ export const addBlockQuotes = htmlStr => {
   // Wrap quotes (denoted by '>', a.k.a. '&gt;') in <blockquote> tags
   let quotedStr = htmlStr;
 
-  [...htmlStr.matchAll(/(<p>)?&gt;(\s*.*?)(<\/?p>)|&gt;(\s*.*?)$/gim)].forEach(
-    ([fullQuote, _p, quote, p2, loneQuote]) => {
-      let blockQuote;
-      if (loneQuote) {
-        blockQuote = `<blockquote>${loneQuote}</blockquote>`;
-      } else if (p2 === '<p>') {
-        blockQuote = `<blockquote>${quote}</blockquote><p>`;
-      } else {
-        blockQuote = `<blockquote>${quote}</blockquote>`;
-      }
-      quotedStr = quotedStr.replace(fullQuote, blockQuote);
+  [
+    ...htmlStr.matchAll(
+      /(?:<p>)(&gt;)(\s*.*?)(?:<\/?p>)|(?:^|\s)(&gt;)(\s*.*?)(<\/?p>|$)/gim
+    )
+  ].forEach(([fullQuote, gt1, quote1, gt2, quote2, p]) => {
+    let blockQuote;
+    if (quote1) {
+      blockQuote = `<blockquote>${quote1.trim()}</blockquote>`;
+    } else if (quote2) {
+      blockQuote = `<blockquote>${quote2.trim()}</blockquote>`;
     }
-  );
+    if (p) {
+      blockQuote += p;
+    }
+    quotedStr = quotedStr.replace(fullQuote, blockQuote);
+  });
 
   return quotedStr;
 };

@@ -55,28 +55,31 @@ test('Wraps quotes in <blockquote> tags', () => {
 
   const onlyQuote = '&gt; This is a quote';
   expect(utils.addBlockQuotes(onlyQuote)).toEqual(
-    '<blockquote> This is a quote</blockquote>'
+    '<blockquote>This is a quote</blockquote>'
   );
+
+  const notAQuote = `A -&gt; B -&gt; C`;
+  expect(utils.addBlockQuotes(notAQuote)).toEqual(notAQuote);
 
   const startQuote = '&gt; This is a quote<p>Foobar</p>';
   expect(utils.addBlockQuotes(startQuote)).toEqual(
-    '<blockquote> This is a quote</blockquote><p>Foobar</p>'
+    '<blockquote>This is a quote</blockquote><p>Foobar</p>'
   );
 
   const endQuote = 'Foobar<p>&gt; This is a quote</p>';
   expect(utils.addBlockQuotes(endQuote)).toEqual(
-    'Foobar<blockquote> This is a quote</blockquote>'
+    'Foobar<blockquote>This is a quote</blockquote>'
   );
 
   const middleQuote = 'Foobar<p>&gt; This is a quote</p><p>Foobar</p>';
   expect(utils.addBlockQuotes(middleQuote)).toEqual(
-    'Foobar<blockquote> This is a quote</blockquote><p>Foobar</p>'
+    'Foobar<blockquote>This is a quote</blockquote><p>Foobar</p>'
   );
 
   const multiQuote =
     'Foobar<p>&gt; This is a quote</p><p>&gt; This is another quote</p>';
   expect(utils.addBlockQuotes(multiQuote)).toEqual(
-    'Foobar<blockquote> This is a quote</blockquote><blockquote> This is another quote</blockquote>'
+    'Foobar<blockquote>This is a quote</blockquote><blockquote>This is another quote</blockquote>'
   );
 });
 

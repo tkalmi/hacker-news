@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import Author from '../Author';
 import Comment from '../Comment/Comment';
 import PublishTime from '../PublishTime';
+import CommentList from '../Comment/CommentList';
 
 const ItemDetails = props => {
   // Get item id from URL params
@@ -36,13 +37,13 @@ const ItemDetails = props => {
         <main>
           <h2>Comments</h2>
 
-          <ul>
+          <CommentList>
             {story.kids.map(kid => (
               <li key={kid}>
                 <Comment id={kid} originalPoster={story.by} />
               </li>
             ))}
-          </ul>
+          </CommentList>
         </main>
       )}
     </section>
