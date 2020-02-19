@@ -1,5 +1,7 @@
 # (Yet Another) Hacker News Client
 
+<a href="https://clever-mccarthy-164744.netlify.com">Live Demo</a>
+
 This is a generic Hacker News client, utilizing the open source
 <a href="https://github.com/HackerNews/API">Hacker News Firebase API</a>.
 Motivation for building this project was boredom and desire to play with React
