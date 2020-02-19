@@ -9,7 +9,7 @@ import { addBlockQuotes, ensureHonestLinks } from '../../utils';
 import Comment from './Comment';
 import CommentList from './CommentList';
 import StoryDetailsFooter from '../StoryDetailsFooter';
-import Loader from '../Loader';
+import Spinner from '../Spinner';
 
 const SectionWrapper = styled.section`
   padding: 15px;
@@ -20,7 +20,7 @@ const SectionWrapper = styled.section`
   margin: 15px -10px 0;
 `;
 
-const LoaderSection = styled.section`
+const SpinnerSection = styled.section`
   margin-top: 10px;
 `;
 
@@ -39,9 +39,9 @@ const ItemDetails = props => {
 
   if (!isLoaded(story)) {
     return (
-      <LoaderSection>
-        <Loader />
-      </LoaderSection>
+      <SpinnerSection>
+        <Spinner />
+      </SpinnerSection>
     );
   }
 
