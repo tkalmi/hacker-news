@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import NewsItem from './NewsItem.js';
 import Container from '../Container.js';
+import Spinner from '../Spinner';
 
 const STORIES_PER_PAGE = 30;
 
@@ -50,7 +51,11 @@ const News = props => {
 
   // Show spinner animation while loading
   if (!isLoaded(storyIds)) {
-    return 'Loading...';
+    return (
+      <Container>
+        <Spinner />
+      </Container>
+    );
   }
 
   // Render news items in a list of NewsItem component
