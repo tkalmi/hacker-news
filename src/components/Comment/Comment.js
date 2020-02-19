@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
+import { useFirebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import sanitizeHtml from 'sanitize-html';
 import styled from 'styled-components';
@@ -59,11 +59,14 @@ const CommentDetails = styled.div`
 
 const Button = styled.button`
   align-items: center;
+  background-color: white;
+  border-image: none;
+  border-radius: 3px;
   display: flex;
   margin-bottom: 5px;
 
   &:active {
-    color: white;
+    background-color: ${props => props.theme.lightAccentColor};
   }
 `;
 
@@ -89,6 +92,10 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
         <Loader />
       </CommentContainer>
     );
+  }
+
+  if (isEmpty(comment)) {
+    return null;
   }
 
   return (
