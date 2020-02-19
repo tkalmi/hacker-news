@@ -70,7 +70,7 @@ const Button = styled.button`
   }
 `;
 
-const Comment = ({ depth = 0, id, originalPoster }) => {
+const Comment = ({ depth = 0, id, originalPoster, theme }) => {
   const [showMore, setShowMore] = useState(depth < 2);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -106,7 +106,10 @@ const Comment = ({ depth = 0, id, originalPoster }) => {
             {comment.deleted ? (
               '[DELETED]'
             ) : (
-              <Author author={comment.by}>
+              <Author
+                author={comment.by}
+                highlighted={comment.by === originalPoster}
+              >
                 {comment.by === originalPoster && `${comment.by} [OP]`}
               </Author>
             )}
