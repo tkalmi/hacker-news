@@ -27,7 +27,6 @@ updated in real-time.
 - Improve test coverage
 - Update publish time in real-time
 - Visual cue for updated data
-- Improve SEO
 
 # Create-React-App Generated Contents
 
