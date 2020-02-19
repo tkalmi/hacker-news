@@ -12,7 +12,7 @@ updated in real-time.
 
 # Tech Stack
 
-- React 16.12
+- React 16.12 (only hooks and function components, no class components used!)
 - Firebase
 - Redux (although used only for connecting Firebase)
 - styled-components 💅
