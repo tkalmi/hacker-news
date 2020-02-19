@@ -1,57 +1,60 @@
 import styled from 'styled-components';
 
 const Spinner = styled.div`
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1em;
+  animation: load1 1s infinite ease-in-out;
+  animation-delay: -0.16s;
+  background: ${props => props.theme.accentColor};
   color: ${props => props.theme.accentColor};
   font-size: 11px;
-  height: 10em;
-  margin: 55px auto;
+  height: 4em;
+  margin: 88px auto;
   position: relative;
-  text-indent: -99999em;
+  text-indent: -9999em;
   transform: translateZ(0);
-  width: 10em;
+  width: 1em;
 
   &:before,
   &:after {
-    border-radius: 50%;
+    animation: load1 1s infinite ease-in-out;
+    background: ${props => props.theme.accentColor};
+    height: 4em;
+    width: 1em;
+  }
+  &:before,
+  &:after {
     content: '';
     position: absolute;
+    top: 0;
   }
   &:before {
-    animation: load2 2s infinite ease 1.5s;
-    background: ${props => props.theme.lightAccentColor};
-    border-radius: 10.2em 0 0 10.2em;
-    left: -0.1em;
-    height: 10.2em;
-    top: -0.1em;
-    transform-origin: 5.1em 5.1em;
-    width: 5.2em;
+    animation-delay: -0.32s;
+    left: -1.5em;
   }
   &:after {
-    animation: load2 2s infinite ease;
-    background: ${props => props.theme.lightAccentColor};
-    border-radius: 0 10.2em 10.2em 0;
-    height: 10.2em;
-    left: 4.9em;
-    top: -0.1em;
-    transform-origin: 0.1em 5.1em;
-    width: 5.2em;
+    left: 1.5em;
   }
-  @-webkit-keyframes load2 {
-    0% {
-      transform: rotate(0deg);
-    }
+  @-webkit-keyframes load1 {
+    0%,
+    80%,
     100% {
-      transform: rotate(360deg);
+      box-shadow: 0 0;
+      height: 4em;
+    }
+    40% {
+      box-shadow: 0 -2em;
+      height: 5em;
     }
   }
-  @keyframes load2 {
-    0% {
-      transform: rotate(0deg);
-    }
+  @keyframes load1 {
+    0%,
+    80%,
     100% {
-      transform: rotate(360deg);
+      box-shadow: 0 0;
+      height: 4em;
+    }
+    40% {
+      box-shadow: 0 -2em;
+      height: 5em;
     }
   }
 `;
