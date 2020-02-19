@@ -15,6 +15,7 @@ import Container from './components/Container.js';
 
 const GlobalStyling = createGlobalStyle`
   html {
+    background-color: ${props => props.theme.lightAccentColor};
     color: ${props => props.theme.darkFontColor};
   }
 
