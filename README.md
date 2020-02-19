@@ -7,7 +7,8 @@ This is a generic Hacker News client, utilizing the open source
 Motivation for building this project was boredom and desire to play with React
 after working with AngularJS at work for the past 9 months.
 
-Built with accessibility in mind using mobile-first design principles.
+Built with accessibility in mind using mobile-first design principles. Data is
+updated in real-time.
 
 # Tech Stack
 
@@ -24,6 +25,8 @@ Built with accessibility in mind using mobile-first design principles.
 - Improved user page
 - Darkmode
 - Improve test coverage
+- Update publish time in real-time
+- Visual cue for updated data
 
 # Create-React-App Generated Contents
 
