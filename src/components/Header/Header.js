@@ -33,6 +33,15 @@ const NavBar = styled.nav`
     margin: 0 20px 0 0;
     font-size: ${props => props.theme.normalFontSize};
     white-space: nowrap;
+
+    a {
+      color: initial;
+      text-decoration: none;
+    }
+
+    a[visited] {
+      color: initial;
+    }
   }
 
   h1 img {
@@ -77,8 +86,10 @@ const Header = props => {
       <Container>
         <NavBar aria-label="Navigate between different lists of stories">
           <h1>
-            <img src={Logo} aria-hidden="true" alt="" />
-            Hacker News
+            <NavLink to="/">
+              <img src={Logo} aria-hidden="true" alt="" />
+              Hacker News
+            </NavLink>
           </h1>
           <LinkList>
             {LINKS.map(link => (
