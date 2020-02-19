@@ -22,6 +22,9 @@ const GlobalStyling = createGlobalStyle`
     font-size: ${props => props.theme.largeFontSize};
     line-height: 1.35;
   }
+  p {
+    word-break: break-word;
+  }
 
   p, footer, button{
     font-size: ${props => props.theme.normalFontSize};
