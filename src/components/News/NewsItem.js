@@ -3,7 +3,7 @@ import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import Loader from '../Loader/Loader';
+import Loader from '../Loader';
 import StoryDetailsFooter from '../StoryDetailsFooter';
 
 const Article = styled.article`

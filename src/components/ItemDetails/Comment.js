@@ -10,7 +10,7 @@ import { addBlockQuotes, ensureHonestLinks } from '../../utils';
 import PublishTime from '../PublishTime';
 import CommentList from './CommentList';
 import Separator from '../Separator';
-import Loader from '../Loader/Loader';
+import Loader from '../Loader';
 
 const COMMENT_COLORS = ['lime', 'red', 'orange', 'yellow'];
 

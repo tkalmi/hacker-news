@@ -4,7 +4,7 @@ import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import NewsItem from '../NewsItem/NewsItem.js';
+import NewsItem from './NewsItem.js';
 import Container from '../Container.js';
 
 const STORIES_PER_PAGE = 30;

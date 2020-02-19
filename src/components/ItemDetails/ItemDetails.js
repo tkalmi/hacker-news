@@ -6,10 +6,10 @@ import sanitizeHtml from 'sanitize-html';
 import styled from 'styled-components';
 
 import { addBlockQuotes, ensureHonestLinks } from '../../utils';
-import Comment from '../Comment/Comment';
-import CommentList from '../Comment/CommentList';
+import Comment from './Comment';
+import CommentList from './CommentList';
 import StoryDetailsFooter from '../StoryDetailsFooter';
-import Loader from '../Loader/Loader';
+import Loader from '../Loader';
 
 const SectionWrapper = styled.section`
   padding: 15px;
