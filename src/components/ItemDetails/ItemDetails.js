@@ -11,6 +11,15 @@ import CommentList from '../Comment/CommentList';
 import StoryDetailsFooter from '../StoryDetailsFooter';
 import Loader from '../Loader/Loader';
 
+const SectionWrapper = styled.section`
+  padding: 15px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 20px 20px 60px #d8d9d9, -20px -20px 60px #ffffff;
+  height: 100%;
+  margin: 15px -10px 0;
+`;
+
 const LoaderSection = styled.section`
   margin-top: 10px;
 `;
@@ -37,7 +46,7 @@ const ItemDetails = props => {
   }
 
   return (
-    <section>
+    <SectionWrapper>
       <header>
         <h1>
           {story.url ? <a href={story.url}>{story.title}</a> : story.title}
@@ -55,10 +64,10 @@ const ItemDetails = props => {
         )}
       </header>
 
-      {story.kids && (
-        <main>
-          <h2>Comments</h2>
+      <main>
+        <h2>{story.kids ? 'Comments' : 'No Comments Yet...'}</h2>
 
+        {story.kids && (
           <CommentList>
             {story.kids.map(kid => (
               <li key={kid}>
@@ -66,9 +75,9 @@ const ItemDetails = props => {
               </li>
             ))}
           </CommentList>
-        </main>
-      )}
-    </section>
+        )}
+      </main>
+    </SectionWrapper>
   );
 };
 
