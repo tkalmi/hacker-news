@@ -64,7 +64,7 @@ const LinkList = styled.ul`
 
   li {
     font-size: ${props => props.theme.normalFontSize};
-    padding: 4px 8px;
+    padding: 4px 6px;
 
     &:first-child {
       padding-left: 0;
