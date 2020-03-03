@@ -145,9 +145,9 @@ const Comment = ({ depth = 0, id, originalPoster, theme }) => {
         (!showMore ? (
           <Button onClick={handleShowMore}>More</Button>
         ) : (
-          <CommentList>
+          <CommentList role="group">
             {comment.kids.map(kid => (
-              <li key={kid}>
+              <li key={kid} role="treeitem" aria-expanded={true}>
                 <Comment
                   depth={depth + 1}
                   id={kid}

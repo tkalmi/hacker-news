@@ -68,9 +68,9 @@ const ItemDetails = props => {
         <h2>{story.kids ? 'Comments' : 'No Comments Yet...'}</h2>
 
         {story.kids && (
-          <CommentList>
+          <CommentList role="tree">
             {story.kids.map(kid => (
-              <li key={kid}>
+              <li key={kid} role="treeitem">
                 <Comment id={kid} originalPoster={story.by} />
               </li>
             ))}
