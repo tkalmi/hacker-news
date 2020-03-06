@@ -1,6 +1,6 @@
 # (Yet Another) Hacker News Client
 
-<a href="https://clever-mccarthy-164744.netlify.com">Live Demo</a>
+<a href="https://hackernews-client.netlify.com">Live Demo</a>
 
 This is a generic Hacker News client, utilizing the open source
 <a href="https://github.com/HackerNews/API">Hacker News Firebase API</a>.
