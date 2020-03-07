@@ -46,7 +46,7 @@ const Footer = styled.footer`
   }
 `;
 
-export default function StoryDetailsFooter({ id, compact, ...story }) {
+export default function StoryDetailsFooter({ item, compact, ...story }) {
   return (
     <Footer compact={compact}>
       <div className="publishers">
@@ -71,11 +71,11 @@ export default function StoryDetailsFooter({ id, compact, ...story }) {
           }`}
         >
           <MdChatBubbleOutline aria-hidden="true" />
-          {id == null ? (
+          {item == null ? (
             story.descendants
           ) : (
             <Link
-              to={`/item/${id}`}
+              to={`/item/${item}`}
               aria-label="Open to view comments and other item details"
             >
               {story.descendants}

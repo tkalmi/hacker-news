@@ -70,13 +70,13 @@ const Button = styled.button`
   }
 `;
 
-const Comment = ({ depth = 0, id, originalPoster, theme }) => {
+const Comment = ({ depth = 0, item, originalPoster, theme }) => {
   const [showMore, setShowMore] = useState(depth < 2);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  useFirebaseConnect(`v0/item/${id}`);
+  useFirebaseConnect(`v0/item/${item}`);
   // Fetch comment
-  const comment = useSelector(state => state.firebase.data.v0?.item?.[id]);
+  const comment = useSelector(state => state.firebase.data.v0?.item?.[item]);
 
   const handleShowMore = () => {
     setShowMore(true);
@@ -150,7 +150,7 @@ const Comment = ({ depth = 0, id, originalPoster, theme }) => {
               <li key={kid} role="treeitem" aria-expanded={true}>
                 <Comment
                   depth={depth + 1}
-                  id={kid}
+                  item={kid}
                   originalPoster={originalPoster}
                 />
               </li>

@@ -9,8 +9,22 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+export const ACTIONS = {
+  SET_LAST_ITEM_ID: 'SET_LAST_ITEM_ID'
+};
+
+function lastItemIdReducer(state = -1, action) {
+  switch (action.type) {
+    case ACTIONS.SET_LAST_ITEM_ID:
+      return action.item || -1;
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
-  firebase: firebaseReducer
+  firebase: firebaseReducer,
+  lastItemId: lastItemIdReducer
 });
 
 const initialState = {};

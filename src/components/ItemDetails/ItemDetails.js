@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import sanitizeHtml from 'sanitize-html';
 import styled from 'styled-components';
 
+import { ACTIONS } from '../../store';
 import { addBlockQuotes, ensureHonestLinks } from '../../utils';
 import Comment from './Comment';
 import CommentList from './CommentList';
@@ -37,6 +38,12 @@ const ItemDetails = props => {
     window.scrollTo(0, 0);
   }, []);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.SET_LAST_ITEM_ID, item: parseInt(itemId, 10) });
+  }, [dispatch, itemId]);
+
   useFirebaseConnect(`v0/item/${itemId}`);
   // Fetch story
   const story = useSelector(state => state.firebase.data.v0?.item?.[itemId]);
@@ -55,7 +62,7 @@ const ItemDetails = props => {
         <h1>
           {story.url ? <a href={story.url}>{story.title}</a> : story.title}
         </h1>
-        <StoryDetailsFooter {...story} id={undefined} compact={true} />
+        <StoryDetailsFooter {...story} item={undefined} compact={true} />
 
         {story.text && (
           <StoryDescription
@@ -75,7 +82,7 @@ const ItemDetails = props => {
           <CommentList role="tree">
             {story.kids.map(kid => (
               <li key={kid} role="treeitem">
-                <Comment id={kid} originalPoster={story.by} />
+                <Comment item={kid} originalPoster={story.by} />
               </li>
             ))}
           </CommentList>
