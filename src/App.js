@@ -10,7 +10,6 @@ import ItemDetails from './components/ItemDetails/ItemDetails.js';
 import UserDetails from './components/UserDetails/UserDetails.js';
 import Header from './components/Header/Header';
 import { standardTheme } from './theme.js';
-import ScrollToTop from './components/ScrollToTop.js';
 import Container from './components/Container.js';
 
 const GlobalStyling = createGlobalStyle`
@@ -75,7 +74,6 @@ function App() {
         <BrowserRouter>
           <ThemeProvider theme={standardTheme}>
             <GlobalStyling />
-            <ScrollToTop />
             <Header />
             <Container>
               <Switch>

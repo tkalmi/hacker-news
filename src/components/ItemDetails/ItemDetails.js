@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ const SectionWrapper = styled.section`
   border-radius: 3px;
   box-shadow: 20px 20px 60px #d8d9d9, -20px -20px 60px #ffffff;
   height: 100%;
-  margin: 15px -10px 0;
+  margin: 0 -10px;
 `;
 
 const SpinnerSection = styled.section`
@@ -32,6 +32,10 @@ const StoryDescription = styled.p`
 const ItemDetails = props => {
   // Get item id from URL params
   const { itemId } = useParams();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useFirebaseConnect(`v0/item/${itemId}`);
   // Fetch story

@@ -80,13 +80,17 @@ const LinkList = styled.ul`
   }
 `;
 
+function scrollToTop() {
+  window.scrollTo(0, 0);
+}
+
 const Header = props => {
   return (
     <HeaderElement>
       <Container>
         <NavBar aria-label="Navigate between different lists of stories">
           <h1>
-            <NavLink to="/">
+            <NavLink to="/" onClick={scrollToTop}>
               <img src={Logo} aria-hidden="true" alt="" />
               Hacker News
             </NavLink>
@@ -94,7 +98,12 @@ const Header = props => {
           <LinkList>
             {LINKS.map(link => (
               <li key={link.path}>
-                <NavLink exact to={link.path} activeClassName="active">
+                <NavLink
+                  exact
+                  to={link.path}
+                  activeClassName="active"
+                  onClick={scrollToTop}
+                >
                   {link.label}
                 </NavLink>
               </li>
