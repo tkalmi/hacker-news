@@ -21,11 +21,11 @@ const Heading = styled.h1`
   margin-bottom: 0;
 `;
 
-const NewsItem = ({ id, idx }) => {
-  useFirebaseConnect(`v0/item/${id}`);
+const NewsItem = ({ idx, item }) => {
+  useFirebaseConnect(`v0/item/${item}`);
 
   // Fetch story
-  const story = useSelector(state => state.firebase.data.v0?.item?.[id]);
+  const story = useSelector(state => state.firebase.data.v0?.item?.[item]);
 
   if (!isLoaded(story)) {
     return (
@@ -43,10 +43,10 @@ const NewsItem = ({ id, idx }) => {
     <Article>
       <header>
         <Heading>
-          {idx}. <a href={story.url || `/item/${id}`}>{story.title}</a>
+          {idx}. <a href={story.url || `/item/${item}`}>{story.title}</a>
         </Heading>
       </header>
-      <StoryDetailsFooter {...story} id={id} />
+      <StoryDetailsFooter {...story} item={item} />
     </Article>
   );
 };

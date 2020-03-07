@@ -84,22 +84,22 @@ function App() {
                   <UserDetails />
                 </Route>
                 <Route path="/newstories">
-                  <News />
+                  <News path="newstories" />
                 </Route>
                 <Route path="/beststories">
-                  <News />
+                  <News path="beststories" />
                 </Route>
                 <Route path="/askstories">
-                  <News />
+                  <News path="askstories" />
                 </Route>
                 <Route path="/showstories">
-                  <News />
+                  <News path="showstories" />
                 </Route>
                 <Route path="/jobstories">
-                  <News />
+                  <News path="jobstories" />
                 </Route>
                 <Route path="/">
-                  <News />
+                  <News path="topstories" />
                 </Route>
               </Switch>
             </Container>

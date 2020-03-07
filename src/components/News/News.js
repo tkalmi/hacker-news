@@ -1,28 +1,41 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useLayoutEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFirebaseConnect, isLoaded } from 'react-redux-firebase';
-import { useLocation } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import NewsItem from './NewsItem.js';
 import Container from '../Container.js';
 import Spinner from '../Spinner';
+import { useHistory } from 'react-router-dom';
 
 const STORIES_PER_PAGE = 30;
 
-const News = props => {
-  const path = useLocation().pathname.replace('/', '') || 'topstories';
-
-  const [visibleStoryRange, setVisibleStoryRange] = useState([]);
+const News = ({ path = 'topstories' }) => {
+  const lastItemId = useSelector(state => state.lastItemId);
+  const { action: historyAction } = useHistory();
+  const dispatch = useDispatch();
 
   useFirebaseConnect(`v0/${path}`);
 
   // Fetch top stories
   const storyIds = useSelector(state => state.firebase.data.v0?.[path]);
 
+  // Make sure that the last visible item is visible if using browser's BACK functionality
+  const initialStoryCount =
+    historyAction === 'POP' &&
+    (storyIds || []).indexOf(lastItemId) + STORIES_PER_PAGE;
+
+  const [visibleStoryCount, setVisibleStoryCount] = useState(initialStoryCount);
+
+  useLayoutEffect(() => {
+    const element = document.getElementById(lastItemId);
+    if (historyAction === 'POP' && element) {
+      window.scrollTo(0, element.offsetTop);
+    }
+  }, [dispatch, historyAction, lastItemId]);
+
   function loadMore() {
-    const [start, end] = visibleStoryRange;
-    setVisibleStoryRange([start, end + STORIES_PER_PAGE]);
+    setVisibleStoryCount(visibleStoryCount + STORIES_PER_PAGE);
   }
 
   // Show spinner animation while loading
@@ -39,23 +52,19 @@ const News = props => {
     <section>
       <main>
         <InfiniteScroll
+          initialLoad={false}
           pageStart={0}
-          hasMore={
-            visibleStoryRange[0] > 0 ||
-            visibleStoryRange[1] < storyIds.length - 1
-          }
+          hasMore={visibleStoryCount < storyIds.length - 1}
           loadMore={loadMore}
           role="list"
           style={{ listStyle: 'none' }}
           loader={<Spinner key="spinner" />}
         >
-          {storyIds
-            .slice(visibleStoryRange[0], visibleStoryRange[1])
-            .map((id, idx) => (
-              <li key={id}>
-                <NewsItem id={id} idx={1 + idx} />
-              </li>
-            ))}
+          {storyIds.slice(0, visibleStoryCount).map((id, idx) => (
+            <li id={id} key={id}>
+              <NewsItem item={id} idx={1 + idx} />
+            </li>
+          ))}
         </InfiniteScroll>
       </main>
     </section>
