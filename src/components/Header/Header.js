@@ -30,8 +30,10 @@ const NavBar = styled.nav`
   justify-content: space-between;
 
   h1 {
-    margin: 0 20px 0 0;
+    flex: 1 1 100%;
+    margin: 0;
     font-size: ${props => props.theme.normalFontSize};
+    text-align: center;
     white-space: nowrap;
 
     a {
@@ -41,6 +43,10 @@ const NavBar = styled.nav`
 
     a[visited] {
       color: initial;
+    }
+
+    @media (min-width: 400px) {
+      flex: 0 0 auto;
     }
   }
 
@@ -57,6 +63,7 @@ const NavBar = styled.nav`
 
 const LinkList = styled.ul`
   display: flex;
+  flex: 1 1 100%;
   justify-content: center;
   list-style: none;
   margin: 0;
@@ -77,6 +84,10 @@ const LinkList = styled.ul`
 
   .active {
     background-color: white !important;
+  }
+
+  @media (min-width: 400px) {
+    flex: 0 0 auto;
   }
 `;
 
