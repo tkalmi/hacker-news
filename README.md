@@ -15,7 +15,7 @@ updated in real-time.
 - React 16.12 (utilizes only hooks and function components, no class components
   used!)
 - Firebase
-- Redux (although used only for connecting to Firebase)
+- Redux
 - react-infinite-scroller
 - styled-components 💅
 - Jest
