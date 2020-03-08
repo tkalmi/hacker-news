@@ -1,5 +1,5 @@
 export const getTimeDiff = time => {
-  const currentTime = new Date().getTime() / 1000;
+  const currentTime = new Date().getTime() / 1_000;
   const diff = currentTime - time;
   if (diff < 60) {
     const parsed = Math.round(diff);
