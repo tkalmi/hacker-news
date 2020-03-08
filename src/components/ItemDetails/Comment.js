@@ -31,16 +31,29 @@ const CommentDetails = styled.div`
 
   &::before {
     background-color: ${props =>
-      props.depth > 0
-        ? COMMENT_COLORS[props.depth % COMMENT_COLORS.length]
-        : 'opaque'};
-    border-radius: 2px;
+      COMMENT_COLORS[props.depth % COMMENT_COLORS.length]};
+    border-radius: 1px;
     content: '';
     height: 100%;
     left: -15px;
     position: absolute;
     top: 0;
-    width: 3px;
+    visibility: ${props => (props.depth === 0 ? 'hidden' : '')};
+    width: 2px;
+  }
+
+  &::after {
+    border: 1px dashed
+      ${props => COMMENT_COLORS[props.depth % COMMENT_COLORS.length]};
+    border-radius: 1px;
+    bottom: -35px;
+    content: '';
+    height: 35px;
+    left: -15px;
+    position: absolute;
+    visibility: ${props =>
+      props.showMore || !props.kids?.length ? 'hidden' : ''};
+    width: 0;
   }
 
   > header {
@@ -49,7 +62,8 @@ const CommentDetails = styled.div`
     display: flex;
     font-size: ${props => props.theme.normalFontSize};
     justify-content: space-between;
-    margin-bottom: 5px;
+    height: 25px;
+    padding-bottom: 5px;
   }
 
   > p {
@@ -100,7 +114,7 @@ const Comment = ({ depth = 0, item, originalPoster, theme }) => {
 
   return (
     <CommentContainer className={isCollapsed ? 'collapsed' : ''}>
-      <CommentDetails depth={depth}>
+      <CommentDetails depth={depth} showMore={showMore} kids={comment.kids}>
         <header>
           <div>
             {comment.deleted ? (
