@@ -12,7 +12,8 @@ updated in real-time.
 
 # Tech Stack
 
-- React 16.12 (utilizes only hooks and function components, no class components used!)
+- React 16.12 (utilizes only hooks and function components, no class components
+  used!)
 - Firebase
 - Redux (although used only for connecting to Firebase)
 - react-infinite-scroller
@@ -26,7 +27,6 @@ updated in real-time.
 - Improved user page
 - Darkmode
 - Improve test coverage
-- Update publish time in real-time
 - Visual cue for updated data
 
 # Create-React-App Generated Contents
