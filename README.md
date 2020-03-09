@@ -1,4 +1,4 @@
-# (Yet Another) Hacker News Client
+# 🦄 (Yet Another) Hacker News Client
 
 <a href="https://hackernews-client.netlify.com">Live Demo</a>
 
