@@ -10,6 +10,12 @@ test('Gets correct time difference from given Unix timestp', () => {
   const secondsAgo = SYSTEM_TIME - 10;
   expect(utils.getTimeDiff(secondsAgo)).toEqual('10s');
 
+  const exactlyOneMinuteAgo = SYSTEM_TIME - 60;
+  expect(utils.getTimeDiff(exactlyOneMinuteAgo)).toEqual('1m');
+
+  const almostOneMinuteAgo = SYSTEM_TIME - 59.9;
+  expect(utils.getTimeDiff(almostOneMinuteAgo)).toEqual('1m');
+
   const minutesAgo = SYSTEM_TIME - 100;
   expect(utils.getTimeDiff(minutesAgo)).toEqual('2m');
 

@@ -1,20 +1,27 @@
+const TIMES_IN_SECONDS = {
+  MINUTE: 60,
+  HOUR: 3_600,
+  DAY: 86_400,
+  YEAR: 31_536_000
+};
+
 export const getTimeDiff = time => {
+  const { MINUTE, HOUR, DAY, YEAR } = TIMES_IN_SECONDS;
   const currentTime = new Date().getTime() / 1_000;
-  const diff = currentTime - time;
-  if (diff < 60) {
-    const parsed = Math.round(diff);
-    return `${parsed}s`;
-  } else if (diff < 3_600) {
-    const parsed = Math.round(diff / 60);
+  const diffInSeconds = Math.round(currentTime - time);
+  if (diffInSeconds < MINUTE) {
+    return `${diffInSeconds}s`;
+  } else if (diffInSeconds < HOUR) {
+    const parsed = Math.round(diffInSeconds / MINUTE);
     return `${parsed}m`;
-  } else if (diff < 86_400) {
-    const parsed = Math.round(diff / 3_600);
+  } else if (diffInSeconds < DAY) {
+    const parsed = Math.round(diffInSeconds / HOUR);
     return `${parsed}h`;
-  } else if (diff < 31_536_000) {
-    const parsed = Math.round(diff / 86_400);
+  } else if (diffInSeconds < YEAR) {
+    const parsed = Math.round(diffInSeconds / DAY);
     return `${parsed}d`;
   }
-  const parsed = Math.round(diff / 31_536_000);
+  const parsed = Math.round(diffInSeconds / YEAR);
   return `${parsed}y`;
 };
 
