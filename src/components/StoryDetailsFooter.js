@@ -12,7 +12,9 @@ import PublishTime from './PublishTime';
 const LINE_MARGIN = '6px';
 
 const LineWrapper = styled.div`
+  flex-grow: 1;
   margin: 0 -${LINE_MARGIN};
+  text-align: right;
 `;
 
 const StatusItem = styled.span`
