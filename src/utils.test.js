@@ -34,11 +34,26 @@ test('Gets correct time difference from given Unix timestp', () => {
 
 test('Ensures content for <a> to match its href', () => {
   const honestATag = '<a href="foobar.com">foobar.com</a>';
-  expect(utils.ensureHonestLinks(honestATag)).toEqual(honestATag);
+  expect(utils.ensureHonestLinks(honestATag)).toEqual(
+    '<a href="foobar.com" rel="noopener noreferrer">foobar.com</a>'
+  );
+  const honestATagWithSingleQuote = `<a href="foobar.com'">foobar.com'</a>`;
+  expect(utils.ensureHonestLinks(honestATagWithSingleQuote)).toEqual(
+    `<a href="foobar.com'" rel="noopener noreferrer">foobar.com'</a>`
+  );
+
+  const honestATagWithSpace = '<a href="foobar.com" >foobar.com</a>';
+  expect(utils.ensureHonestLinks(honestATagWithSpace)).toEqual(
+    '<a href="foobar.com" rel="noopener noreferrer">foobar.com</a>'
+  );
+
+  const honestATagWithRel =
+    '<a href="foobar.com" rel="noopener noreferrer">foobar.com</a>';
+  expect(utils.ensureHonestLinks(honestATagWithRel)).toEqual(honestATagWithRel);
 
   const maliciosATag = `<a href="phishing.com">Click here</a>`;
   expect(utils.ensureHonestLinks(maliciosATag)).toEqual(
-    '<a href="phishing.com">phishing.com</a>'
+    '<a href="phishing.com" rel="noopener noreferrer">phishing.com</a>'
   );
 
   const noATag = 'bla bla bla <p>Hello world</p>';
@@ -46,12 +61,14 @@ test('Ensures content for <a> to match its href', () => {
 
   const aTagInsideText =
     "<p>Foobar quux <a href='hello.world'>hello.world</a></p>";
-  expect(utils.ensureHonestLinks(aTagInsideText)).toEqual(aTagInsideText);
+  expect(utils.ensureHonestLinks(aTagInsideText)).toEqual(
+    '<p>Foobar quux <a href="hello.world" rel="noopener noreferrer">hello.world</a></p>'
+  );
 
   const maliciousATagInsideText =
     "<p>Malicious <a href='malicious.com'>Click here</a></p>";
   expect(utils.ensureHonestLinks(maliciousATagInsideText)).toEqual(
-    "<p>Malicious <a href='malicious.com'>malicious.com</a></p>"
+    '<p>Malicious <a href="malicious.com" rel="noopener noreferrer">malicious.com</a></p>'
   );
 });
 

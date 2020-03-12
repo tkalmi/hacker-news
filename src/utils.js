@@ -30,9 +30,11 @@ export const ensureHonestLinks = htmlStr => {
   let honestStr = htmlStr;
 
   [
-    ...htmlStr.matchAll(/<a\s+(?:[^>]*?\s+)?href=["'](.*?)["']>(.*?)<\/a>/gim)
-  ].forEach(([aTag, href, linkStr]) => {
-    const honestLink = aTag.replace(linkStr, href);
+    ...htmlStr.matchAll(
+      /<a\s+(?:[^>]*?)href=(?<quote>["'])(.*?)(?:\k<quote>)[^>]*?>(?:.*?)<\/a>/gim
+    )
+  ].forEach(([aTag, _, href]) => {
+    const honestLink = `<a href="${href}" rel="noopener noreferrer">${href}</a>`;
     honestStr = honestStr.replace(aTag, honestLink);
   });
 
