@@ -26,7 +26,7 @@ export const getTimeDiff = time => {
 };
 
 export const ensureHonestLinks = htmlStr => {
-  // Change links like <a href="malicious.com">Cute Video</a> to <a href="malicious.com">malicious.com</a>
+  // Change links like <a href="malicious.com">Cute Video</a> to <a href="malicious.com" rel="noopener noreferrer">malicious.com</a>
   let honestStr = htmlStr;
 
   [
