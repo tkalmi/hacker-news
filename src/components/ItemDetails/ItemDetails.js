@@ -60,7 +60,13 @@ const ItemDetails = props => {
     <SectionWrapper>
       <header>
         <h1>
-          {story.url ? <a href={story.url}>{story.title}</a> : story.title}
+          {story.url ? (
+            <a href={story.url} rel="noreferrer noopener">
+              {story.title}
+            </a>
+          ) : (
+            story.title
+          )}
         </h1>
         <StoryDetailsFooter {...story} item={undefined} compact={true} />
 

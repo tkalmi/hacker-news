@@ -124,6 +124,7 @@ const Header = props => {
                 className="github"
                 href="https://github.com/tkalmi/hacker-news"
                 title="See the source code on github.com"
+                rel="noopener"
               >
                 <FaGithub aria-label="Github logo" />
               </a>

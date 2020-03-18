@@ -43,7 +43,10 @@ const NewsItem = ({ idx, item }) => {
     <Article>
       <header>
         <Heading>
-          {idx}. <a href={story.url || `/item/${item}`}>{story.title}</a>
+          {idx}.{' '}
+          <a href={story.url || `/item/${item}`} rel="noopener noreferrer">
+            {story.title}
+          </a>
         </Heading>
       </header>
       <StoryDetailsFooter {...story} item={item} />
