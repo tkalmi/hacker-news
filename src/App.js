@@ -14,12 +14,12 @@ import Container from './components/Container.js';
 
 const GlobalStyling = createGlobalStyle`
   html {
-    background-color: ${props => props.theme.lightAccentColor};
-    color: ${props => props.theme.darkFontColor};
+    background-color: ${(props) => props.theme.lightAccentColor};
+    color: ${(props) => props.theme.darkFontColor};
   }
 
-  h1, h2 {
-    font-size: ${props => props.theme.largeFontSize};
+  h1, h2, h3 {
+    font-size: ${(props) => props.theme.largeFontSize};
     line-height: 1.35;
   }
   p {
@@ -27,16 +27,16 @@ const GlobalStyling = createGlobalStyle`
   }
 
   p, footer, button{
-    font-size: ${props => props.theme.normalFontSize};
+    font-size: ${(props) => props.theme.normalFontSize};
     line-height: 1.35;
   }
 
   a {
-    color: ${props => props.theme.linkColor};
+    color: ${(props) => props.theme.linkColor};
     word-wrap: break-word;
 
     &:visited {
-      color: ${props => props.theme.linkVisitedColor};
+      color: ${(props) => props.theme.linkVisitedColor};
     }
   }
 
@@ -49,7 +49,7 @@ const GlobalStyling = createGlobalStyle`
   }
 
   pre {
-    background: ${props => props.theme.lightBgColor};
+    background: ${(props) => props.theme.lightBgColor};
     overflow: scroll;
   }
 
@@ -75,34 +75,36 @@ function App() {
           <ThemeProvider theme={standardTheme}>
             <GlobalStyling />
             <Header />
-            <Container>
-              <Switch>
-                <Route path="/item/:itemId">
-                  <ItemDetails />
-                </Route>
-                <Route path="/user/:userId">
-                  <UserDetails />
-                </Route>
-                <Route path="/newstories">
-                  <News path="newstories" />
-                </Route>
-                <Route path="/beststories">
-                  <News path="beststories" />
-                </Route>
-                <Route path="/askstories">
-                  <News path="askstories" />
-                </Route>
-                <Route path="/showstories">
-                  <News path="showstories" />
-                </Route>
-                <Route path="/jobstories">
-                  <News path="jobstories" />
-                </Route>
-                <Route path="/">
-                  <News path="topstories" />
-                </Route>
-              </Switch>
-            </Container>
+            <main>
+              <Container>
+                <Switch>
+                  <Route path="/item/:itemId">
+                    <ItemDetails />
+                  </Route>
+                  <Route path="/user/:userId">
+                    <UserDetails />
+                  </Route>
+                  <Route path="/newstories">
+                    <News path="newstories" />
+                  </Route>
+                  <Route path="/beststories">
+                    <News path="beststories" />
+                  </Route>
+                  <Route path="/askstories">
+                    <News path="askstories" />
+                  </Route>
+                  <Route path="/showstories">
+                    <News path="showstories" />
+                  </Route>
+                  <Route path="/jobstories">
+                    <News path="jobstories" />
+                  </Route>
+                  <Route path="/">
+                    <News path="topstories" />
+                  </Route>
+                </Switch>
+              </Container>
+            </main>
           </ThemeProvider>
         </BrowserRouter>
       </ReactReduxFirebaseProvider>

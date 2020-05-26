@@ -7,7 +7,7 @@ import Loader from '../Loader';
 import StoryDetailsFooter from '../StoryDetailsFooter';
 
 const Article = styled.article`
-  background: ${props => props.theme.cardBgColor};
+  background: ${(props) => props.theme.cardBgColor};
 
   box-shadow: 20px 20px 60px #d8d9d9, -20px -20px 60px #ffffff;
 
@@ -15,8 +15,8 @@ const Article = styled.article`
   padding: 5px 15px 10px;
 `;
 
-const Heading = styled.h1`
-  font-size: ${props => props.theme.normalFontSize};
+const Heading = styled.h2`
+  font-size: ${(props) => props.theme.normalFontSize};
   line-height: 1.5;
   margin-bottom: 0;
 `;
@@ -25,7 +25,7 @@ const NewsItem = ({ idx, item }) => {
   useFirebaseConnect(`v0/item/${item}`);
 
   // Fetch story
-  const story = useSelector(state => state.firebase.data.v0?.item?.[item]);
+  const story = useSelector((state) => state.firebase.data.v0?.item?.[item]);
 
   if (!isLoaded(story)) {
     return (
@@ -42,7 +42,7 @@ const NewsItem = ({ idx, item }) => {
   return (
     <Article>
       <header>
-        <Heading>
+        <Heading title={story.title}>
           {idx}.{' '}
           <a href={story.url || `/item/${item}`} rel="noopener noreferrer">
             {story.title}

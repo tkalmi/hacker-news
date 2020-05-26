@@ -49,25 +49,21 @@ const News = ({ path = 'topstories' }) => {
 
   // Render news items in a list of NewsItem component
   return (
-    <section>
-      <main>
-        <InfiniteScroll
-          initialLoad={false}
-          pageStart={0}
-          hasMore={visibleStoryCount < storyIds.length - 1}
-          loadMore={loadMore}
-          role="list"
-          style={{ listStyle: 'none' }}
-          loader={<Spinner key="spinner" />}
-        >
-          {storyIds.slice(0, visibleStoryCount).map((id, idx) => (
-            <li id={id} key={id}>
-              <NewsItem item={id} idx={1 + idx} />
-            </li>
-          ))}
-        </InfiniteScroll>
-      </main>
-    </section>
+    <InfiniteScroll
+      initialLoad={false}
+      pageStart={0}
+      hasMore={visibleStoryCount < storyIds.length - 1}
+      loadMore={loadMore}
+      role="list"
+      style={{ listStyle: 'none' }}
+      loader={<Spinner key="spinner" />}
+    >
+      {storyIds.slice(0, visibleStoryCount).map((id, idx) => (
+        <li id={id} key={id}>
+          <NewsItem item={id} idx={1 + idx} />
+        </li>
+      ))}
+    </InfiniteScroll>
   );
 };
 

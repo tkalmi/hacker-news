@@ -26,11 +26,11 @@ const SpinnerSection = styled.section`
 `;
 
 const StoryDescription = styled.p`
-  background-color: ${props => props.theme.lightAccentColor};
+  background-color: ${(props) => props.theme.lightAccentColor};
   padding: 0 5px;
 `;
 
-const ItemDetails = props => {
+const ItemDetails = (props) => {
   // Get item id from URL params
   const { itemId } = useParams();
 
@@ -46,7 +46,7 @@ const ItemDetails = props => {
 
   useFirebaseConnect(`v0/item/${itemId}`);
   // Fetch story
-  const story = useSelector(state => state.firebase.data.v0?.item?.[itemId]);
+  const story = useSelector((state) => state.firebase.data.v0?.item?.[itemId]);
 
   if (!isLoaded(story)) {
     return (
@@ -59,7 +59,7 @@ const ItemDetails = props => {
   return (
     <SectionWrapper>
       <header>
-        <h1>
+        <h2>
           {story.url ? (
             <a href={story.url} rel="noreferrer noopener">
               {story.title}
@@ -67,7 +67,7 @@ const ItemDetails = props => {
           ) : (
             story.title
           )}
-        </h1>
+        </h2>
         <StoryDetailsFooter {...story} item={undefined} compact={true} />
 
         {story.text && (
@@ -75,25 +75,25 @@ const ItemDetails = props => {
             dangerouslySetInnerHTML={{
               __html: story.deleted
                 ? '[DELETED]'
-                : addBlockQuotes(ensureHonestLinks(sanitizeHtml(story.text)))
+                : addBlockQuotes(ensureHonestLinks(sanitizeHtml(story.text))),
             }}
           ></StoryDescription>
         )}
       </header>
 
-      <main>
-        <h2>{story.kids ? 'Comments' : 'No Comments Yet...'}</h2>
+      <div>
+        <h3>{story.kids ? 'Comments' : 'No Comments Yet...'}</h3>
 
         {story.kids && (
           <CommentList role="tree">
-            {story.kids.map(kid => (
+            {story.kids.map((kid) => (
               <li key={kid} role="treeitem">
                 <Comment item={kid} originalPoster={story.by} />
               </li>
             ))}
           </CommentList>
         )}
-      </main>
+      </div>
     </SectionWrapper>
   );
 };
