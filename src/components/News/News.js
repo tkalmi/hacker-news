@@ -11,19 +11,19 @@ import { useHistory } from 'react-router-dom';
 const STORIES_PER_PAGE = 30;
 
 const News = ({ path = 'topstories' }) => {
-  const lastItemId = useSelector(state => state.lastItemId);
+  const lastItemId = useSelector((state) => state.lastItemId);
   const { action: historyAction } = useHistory();
   const dispatch = useDispatch();
 
   useFirebaseConnect(`v0/${path}`);
 
   // Fetch top stories
-  const storyIds = useSelector(state => state.firebase.data.v0?.[path]);
+  const storyIds = useSelector((state) => state.firebase.data.v0?.[path]);
 
   // Make sure that the last visible item is visible if using browser's BACK functionality
   const initialStoryCount =
-    historyAction === 'POP' &&
-    (storyIds || []).indexOf(lastItemId) + STORIES_PER_PAGE;
+    ((historyAction === 'POP' && (storyIds || []).indexOf(lastItemId)) || 0) +
+    STORIES_PER_PAGE;
 
   const [visibleStoryCount, setVisibleStoryCount] = useState(initialStoryCount);
 
