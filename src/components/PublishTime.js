@@ -33,7 +33,11 @@ const PublishTime = ({ time }) => {
   }, [time]);
 
   return (
-    <time dateTime={new Date(time * 1_000).toString()} style={{ minWidth: 24 }}>
+    <time
+      dateTime={new Date(time * 1_000).toString()}
+      style={{ minWidth: 24 }}
+      title={`Published ${timeSince} ago`}
+    >
       {timeSince}
     </time>
   );
