@@ -19,7 +19,7 @@ const LineWrapper = styled.div`
 
 const StatusItem = styled.span`
   align-items: center;
-  color: ${props => props.theme.lightFontColor};
+  color: ${(props) => props.theme.lightFontColor};
   display: inline-flex;
   margin: 0 ${LINE_MARGIN};
 
@@ -32,17 +32,18 @@ const Footer = styled.footer`
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  font-size: ${props => props.theme.normalFontSize};
-  justify-content: ${props => (props.compact ? 'flex-start' : 'space-between')};
+  font-size: ${(props) => props.theme.normalFontSize};
+  justify-content: ${(props) =>
+    props.compact ? 'flex-start' : 'space-between'};
 
   > * {
     margin-top: 10px;
   }
 
   > .publishers {
-    background: ${props => props.theme.lightBgColor};
+    background: ${(props) => props.theme.lightBgColor};
     border-radius: 3px;
-    color: ${props => props.theme.mediumFontColor};
+    color: ${(props) => props.theme.mediumFontColor};
     margin-right: 10px;
     padding: 3px 5px;
   }
@@ -62,6 +63,9 @@ export default function StoryDetailsFooter({ item, compact, ...story }) {
           aria-label={`This item has ${story.score} point${
             story.score === 1 ? 's' : ''
           }`}
+          title={`This item has ${story.score} point${
+            story.score === 1 ? 's' : ''
+          }`}
         >
           <AiOutlineLike aria-hidden="true" />
           {story.score}
@@ -69,6 +73,9 @@ export default function StoryDetailsFooter({ item, compact, ...story }) {
 
         <StatusItem
           aria-label={`This item has ${story.descendants} comment${
+            story.descendants === 1 ? 's' : ''
+          }`}
+          title={`This item has ${story.descendants} comment${
             story.descendants === 1 ? 's' : ''
           }`}
         >
@@ -79,6 +86,7 @@ export default function StoryDetailsFooter({ item, compact, ...story }) {
             <Link
               to={`/item/${item}`}
               aria-label="Open to view comments and other item details"
+              title="Open to view comments and other item details"
             >
               {story.descendants}
             </Link>
@@ -87,6 +95,9 @@ export default function StoryDetailsFooter({ item, compact, ...story }) {
 
         <StatusItem
           aria-label={`This item was published at ${new Date(
+            story.time * 1_000
+          ).toString()}`}
+          title={`This item was published at ${new Date(
             story.time * 1_000
           ).toString()}`}
         >
