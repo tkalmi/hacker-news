@@ -36,11 +36,9 @@ const SpinnerAnimation = styled.div`
     0%,
     80%,
     100% {
-      /* box-shadow: 0 0; */
       transform: scaleY(1);
     }
     40% {
-      /* box-shadow: 0 -2em; */
       transform: scaleY(1.5);
     }
   }
